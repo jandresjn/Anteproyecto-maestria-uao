@@ -1,0 +1,517 @@
+\documentclass[12pt,letterpaper]{article}
+\renewcommand{\rmdefault}{phv} % Cambiar la fuente a Arial
+\hbadness=99999 % Evitar mensaje de advertencia
+
+\usepackage[left=4cm,right=2cm,top=3cm,bottom=3cm]{geometry} % Margenes
+\usepackage[spanish,es-tabla]{babel} % Cambia el texto "Cuadro" por "Tabla"
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc} % Para aceptar caracteres en español: tilde, ñ, etc.
+\usepackage{amsmath}
+\usepackage{amssymb,amsfonts,cancel}
+\usepackage{array}
+\usepackage{enumerate} 
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[pdfstartpage=1,backref=false,pagebackref=false,pdfborder={0 0 0},colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+%\usepackage[none]{hyphenat} %evita la separación de palabras
+\usepackage{natbib}
+\usepackage{longtable}
+\usepackage{multicol} % Dividir en columnas
+\usepackage{multirow}
+\usepackage{ragged2e}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{titlesec}
+\usepackage{titletoc} % alinear títulos en tabla de contenido
+\usepackage{titling} % Cambiar secciones
+\usepackage{colortbl} % agrega colores a columnas
+\usepackage{xcolor}
+\usepackage{tabularx} % Necesario para el tipo de columna X
+\usepackage{enumitem}
+\fancyhead{}
+\fancyfoot[c]{\thepage}
+
+\pagestyle{fancy}
+
+\usepackage{tocloft}
+\addto\captionsenglish{\renewcommand{\contentsname}{Contenido}}
+\renewcommand{\cfttoctitlefont}{\hfill\normalsize}
+\renewcommand{\cftaftertoctitle}{\hfill}
+\renewcommand{\cftloftitlefont}{\hfill\normalsize}
+\renewcommand{\cftafterloftitle}{\hfill\mbox{}}
+\renewcommand{\cftlottitlefont}{\hfill\normalsize}
+\renewcommand{\cftafterlottitle}{\hfill\mbox{}}
+
+\renewcommand{\cftfigfont}{Fig. }
+\renewcommand{\cfttabfont}{TABLA }
+\renewcommand{\spanishtablename}{TABLA}
+
+\usepackage{layout} % Carga el paquete layout
+%\usepackage{showframe} % muestra los márgenes y el área del contenido
+
+\titleclass{\subsubsubsection}{straight}[\subsection]
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\arabic{subsubsubsection}}
+\renewcommand\theparagraph{\thesubsubsubsection.\arabic{paragraph}} % para las subsecciones numeradas
+
+\titleformat{\section}[block]{\bfseries\centering}{\thesection.}{1em}{} % Configuración títulos1
+\titleformat{\subsection} % Configuración de título2
+  {\normalfont\normalsize\bfseries\MakeUppercase}{\thesubsection}{1em}{}
+\titlespacing*{\subsection}{0pt}{0em}{0em}
+\titleformat{\subsubsection} % Configuración de título3
+  {\normalfont\normalsize\bfseries}{\thesubsubsection}{1em}{}
+\titlespacing*{\subsubsection}{0pt}{0em}{0em}
+\titleformat{\subsubsubsection} % Configuración de título4
+  {\normalfont\normalsize\bfseries}{\thesubsubsubsection}{1em}{}
+\titlespacing*{\subsubsubsection}{0pt}{0em}{0em}
+
+\makeatletter % Quitar sangria en listas
+\renewcommand\paragraph{\@startsection{paragraph}{5}{\z@}%
+  {0em}% {3.25ex \@plus1ex \@minus.2ex}
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{6}{\parindent}%
+  {0em}% {3.25ex \@plus1ex \@minus.2ex}
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}  
+\def\toclevel@subsection{2}
+\def\toclevel@subsubsection{3}
+\def\toclevel@subsubsubsection{4}
+\def\toclevel@paragraph{5}
+\def\toclevel@paragraph{6}
+\setlength{\cftsecindent}{0pt}
+\setlength{\cftsubsecindent}{0pt}
+\setlength{\cftsubsubsecindent}{0pt}
+%\setlength{\cftsubsubsubsecindent}{0pt} % Para su custom subsubsubsection
+\setlength{\cftfigindent}{0pt} 
+\setlength{\cfttabindent}{0pt}
+
+\g@addto@macro\cftsecpagefont{\bfseries}
+\g@addto@macro\cftsubsecpagefont{\bfseries\MakeUppercase}
+\g@addto@macro\cftparapagefont{\bfseries} 
+\g@addto@macro\cftsubparapagefont{\bfseries}
+\g@addto@macro\cftfigpagefont{\bfseries} % coloca en negrita los números de página de lof
+\g@addto@macro\cfttabpagefont{\bfseries} % coloca en negrita los números de página de lot
+
+\makeatother
+
+\setcounter{secnumdepth}{4} % indica cantidad de niveles de títulos a mostrar
+\setcounter{tocdepth}{4}
+% Fin Configuración de subtítulos
+
+%\title{Plantilla Latex CRAI-UAO}
+%\date{January 23 2019}
+
+\makeatletter % Cambiar : por . y ponerlo en negrita
+\newcolumntype{U}[0]{>{$}c<{$}} % Nuevo formato para columnas con fórmula
+\renewcommand{\fnum@table}[1]{\textbf{\tablename~\thetable}. \sffamily}
+\renewcommand\thetable{\Roman{table}}
+\makeatother
+
+\renewcommand{\headrulewidth}{0pt}
+\raggedbottom % Quita espacios en blanco    ***Revisar si se necesita
+
+\setlength{\arrayrulewidth}{1pt}
+\setlength{\doublerulesep}{0mm}
+\setlength{\parindent}{0em} % Quitar sangría de primera línea
+\setlength{\parskip}{2em} % Espaciado doble
+
+\begin{document}
+%\layout % muestra el layout
+\definecolor{lightgray}{rgb}{0.75, 0.75, 0.75} % Define the light gray color
+
+
+\makeatletter % Cambiar : por . y ponerlo en negrita
+\renewcommand{\fnum@figure}[1]{\textbf{\figurename~\thefigure}. \sffamily}
+\renewcommand{\figurename}{\textbf{Fig.}} % Cambiar Figura: por Fig. y ponerlo en negrita
+\makeatother
+
+\thispagestyle{empty}
+\begin{center}
+	\includegraphics[scale=1]{Figuras/horizontal-color}
+\end{center}
+\vspace{2.5cm}
+
+\textbf{DATOS GENERALES DEL ESTUDIANTE}
+\vspace{-0.5cm}
+
+\begin{tabularx}{\textwidth}{|>{\columncolor{lightgray}}l|X|}\hline
+\textbf{Nombre Estudiante} & Jorge Andrés Jaramillo Neme\\\hline 
+\textbf{Programa Académico} & Maestría en IA y Ciencia de Datos \\\hline
+\textbf{Cédula} & 1.144.084.317 \\\hline
+\textbf{Código Estudiantil} & Pendiente \\\hline
+\textbf{Correo} & Jorge\_and.jaramillo@uao.edu.co \\\hline
+\end{tabularx}
+
+% Si hay un segundo autor descomente las siguientes líneas
+%\begin{tabularx}{\textwidth}{|>{\columncolor{lightgray}}l|X|}\hline
+%\textbf{Nombre Estudiante} & \textcolor{red}{Escriba acá su nomnbre}\\\hline
+%\textbf{Programa Académico} & \\\hline
+%\textbf{Cédula} & \\\hline
+%\textbf{Código Estudiantil} & \\\hline
+%\textbf{Correo} & \\\hline
+%\end{tabularx}
+
+\textbf{DATOS GENERALES DEL DIRECTOR}
+\vspace{-0.5cm}
+
+\begin{tabularx}{\textwidth}{|>{\columncolor{lightgray}}l|X|}\hline
+\textbf{Nombre Director} & Javier Ferney Castillo García \\\hline
+\textbf{Correo} &  jfcastillo@uao.edu.co\\\hline
+%\textbf{Nombre Codirector} &  \\\hline
+%\textbf{Correo} &  \\\hline
+\end{tabularx}
+
+\textbf{DATOS DEL ANTEPROYECTO}
+%\vspace{-0.5cm}
+
+\begin{longtable}{|p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth}|}
+\hline
+\rowcolor{lightgray}\centering\arraybackslash\textbf{TÍTULO DEL PROYECTO} \\ \hline
+ \textbf{Desarrollo de un sistema agentico basado en grafos de conocimiento y modelos de lenguaje pequeños para la verificación estructural automatizada de propuestas de investigación}\\\hline
+
+\rowcolor{lightgray}\centering\arraybackslash\textbf{PALABRAS CLAVES/KEY WORDS} \\\hline
+Sistemas Agenticos, modelos pequeños de lenguaje, ingeniería de contexto, grafos de conocimiento / Agentic AI, Small Language Models, Context Engineering, Knowledge Graphs.
+ \\\hline
+\rowcolor{lightgray}\centering\arraybackslash\textbf{RESUMEN} \\\hline
+Se presenta un anteproyecto de maestría orientado a abordar la problemática de la coherencia y consistencia estructural en documentos de investigación académica (anteproyectos, proyectos y artículos científicos). A pesar de los avances en herramientas digitales de escritura y en Modelos de Lenguaje de Gran Escala (LLM, Large Language Models), persiste la dificultad de garantizar una alineación rigurosa entre el problema de investigación, los objetivos, la metodología y el sustento teórico. La naturaleza estadística de los LLM y fenómenos como la “amnesia contextual” limitan su capacidad para preservar relaciones causales y dependencias metodológicas en textos extensos, lo que genera vacíos en el aseguramiento de la calidad estructural de los documentos científicos. Frente a este escenario, el objetivo general de este trabajo es diseñar e implementar un prototipo de sistema agéntico copiloto, basado en ingeniería de contexto, que integre grafos de conocimiento (Knowledge Graphs, KG) y modelos de lenguaje pequeños (Small Language Models, SLM), para asistir en la evaluación de la coherencia y consistencia de proyectos de investigación. Metodológicamente, la propuesta se enmarca en un enfoque aplicado–experimental, con predominio cuantitativo y un componente cualitativo complementario. El estudio se desarrolla en fases que incluyen: análisis conceptual y documental de estructuras metodológicas y criterios de coherencia; modelado semántico mediante una ontología y su implementación en un grafo de conocimiento; diseño de la arquitectura agéntica y de sus módulos cognitivos (lectura, verificación, razonamiento, navegación y gestión de memoria contextual); implementación del prototipo integrando KG, SLM y flujos de razonamiento multi-agente; y una etapa de evaluación que combina métricas automáticas de desempeño con la valoración experta en un entorno controlado. Se espera obtener un copiloto cognitivo capaz de representar explícitamente las relaciones entre problema, objetivos, metodología y literatura, detectar desalineaciones o inconsistencias y ofrecer retroalimentación accionable al investigador. Como aporte principal, el proyecto busca avanzar en la integración de sistemas agénticos, grafos de conocimiento e ingeniería de contexto para el aseguramiento estructural de documentos científicos, sentando bases metodológicas y tecnológicas para futuros ecosistemas de apoyo inteligente a la investigación.
+\\\hline
+\end{longtable}
+\setcounter{table}{0}
+
+\begin{titlepage}
+   \begin{center}
+		\textbf{{\MakeUppercase {Desarrollo de un sistema agentico basado en grafos de conocimiento y modelos de lenguaje pequeños para la verificación estructural automatizada de propuestas de investigación}}\\
+		\vspace{4cm}
+		\includegraphics[scale=1.2]{Figuras/horizontal-color}\\
+		\vspace{4cm}
+		{\MakeUppercase {{JORGE ANDRÉS JARAMILLO NEME}} \\
+		{22505049}}\\
+		\vfill
+		{UNIVERSIDAD AUTÓNOMA DE OCCIDENTE} \\
+		{\MakeUppercase {FACULTAD DE INGENIERÍA Y CIENCIAS BÁSICAS}} \\ 
+		{\MakeUppercase {PROGRAMA DE MAESTRÍA EN INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS}} \\
+		{SANTIAGO DE CALI} \\
+		{2025}} \\ 
+	\end{center} 
+\end{titlepage}
+
+\newpage
+\begin{titlepage}
+   \begin{center}
+
+        \textbf{\MakeUppercase{Desarrollo de un sistema agentico basado en grafos de conocimiento y modelos de lenguaje pequeños para la verificación estructural automatizada de propuestas de investigación}}\\
+        
+        \vspace{2cm}
+        \includegraphics[scale=1.2]{Figuras/horizontal-color}\\
+        \vspace{2cm}
+
+        \textbf{\MakeUppercase{JORGE ANDRÉS JARAMILLO NEME}}\\
+        
+        \vspace{2cm}
+        \textbf{Anteproyecto de grado para optar al título de}\\
+        \textbf{Magíster en Inteligencia Artificial y Ciencia de Datos}\\
+
+        \vspace{1cm}
+        \textbf{Director}\\
+        \textbf{\MakeUppercase{Javier Ferney Castillo García}}\\
+        \textbf{Ph.D. en Ingeniería Eléctrica y Electrónica, 2015, Universidad del Valle, Colombia}\\
+        \textbf{Magíster en Ingeniería Eléctrica, 2014, Universidade Federal do Espírito Santo, Brasil}\\
+        \textbf{Magíster en Automática, 2009, Universidad del Valle, Colombia}\\
+        \textbf{Ingeniero Electrónico, 2004, Universidad del Valle, Colombia}\\
+  
+        \vfill
+        \textbf{UNIVERSIDAD AUTÓNOMA DE OCCIDENTE}\\
+        \textbf{\MakeUppercase{FACULTAD DE INGENIERÍA Y CIENCIAS BÁSICAS}}\\
+        \textbf{\MakeUppercase{PROGRAMA DE MAESTRÍA EN INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS}}\\
+        \textbf{SANTIAGO DE CALI}\\
+        \textbf{2025}
+
+    \end{center}
+\end{titlepage}
+
+
+
+\setcounter{page}{3} % Inicia la numeración de páginas
+
+\makeatletter
+\renewcommand{\cftdotsep}{10000} % Quitar puntos en la tabla de contenido
+\makeatother
+
+\setlength{\cftfigindent}{0pt} % quita la sangria en la lista de figuras
+\setlength{\cfttabindent}{0pt} % quita la sangria en la lista de tablas
+
+\newpage
+\noindent\renewcommand{\contentsname}{\textbf{CONTENIDO}} % Quita el espacio superior y cambia el nombre
+\vspace{-1cm}
+\addtocontents{toc}{\hfill \textbf{pág.} \par}
+\textbf{\tableofcontents}
+
+\newpage
+\section*{INTRODUCCIÓN}
+\vspace{-0.5cm}
+\addcontentsline{toc}{section}{INTRODUCCIÓN}
+La historia del desarrollo humano y científico puede interpretarse, fundamentalmente, como una continua búsqueda de métodos para la resolución de problemas. Desde los albores de la ciencia moderna, la necesidad de transformar una idea abstracta en una solución tangible ha obligado a la humanidad a estructurar su pensamiento. Lo que antiguamente se limitaba a la intuición, evolucionó hacia la formalización del método científico y, en la era contemporánea, se ha sistematizado bajo lo que hoy conocemos como la formulación de proyectos de investigación. Este proceso constituye la arquitectura intelectual necesaria para abordar la complejidad, exigiendo una alineación precisa entre la identificación de una necesidad (el problema) y la estrategia para resolverla(Miles, 2019).
+
+Históricamente, la producción de estos documentos ha sido una actividad central en la academia. Sin embargo, con la llegada de la revolución digital y las plataformas colaborativas, aunque se facilitó la escritura, se contribuyó poco a resolver el desafío de fondo: garantizar la solidez estructural del planteamiento. La alineación lógica entre un problema, sus objetivos y su metodología(Covvey et al., 2023) siguió siendo una tarea manual, sujeta a errores humanos y fatiga cognitiva.
+
+En la última década, el panorama cambió con la irrupción de la Inteligencia Artificial Generativa y los Modelos de Lenguaje de Gran Escala (LLMs). Herramientas como GPT o BERT demostraron una capacidad sin precedentes para generar texto fluido. No obstante, al integrarse en la investigación, surgió una paradoja: estos modelos operan como excelentes redactores, pero como deficientes metodólogos. Carecen de una comprensión profunda de las dependencias causales que exige un proyecto, sufriendo a menudo de "amnesia contextual"(Huang et al., 2025) y generando propuestas que, aunque elocuentes, presentan fisuras lógicas estructurales.
+
+Es en esta coyuntura donde la presente investigación encuentra su máxima pertinencia. En el actual escenario de competitividad académica global, la exigencia ha escalado drásticamente. Ya no basta con redactar documentos extensos; para lograr la aceptación en revistas de alto impacto (Q1/Q2) o el éxito en convocatorias de financiación cada vez más reñidas, se requiere que los papers y propuestas estén rigurosamente alineados. Los evaluadores y organismos financiadores penalizan severamente las inconsistencias metodológicas, donde los objetivos no tributan al problema o la metodología no responde a la pregunta de investigación. La capacidad de producir documentos no solo "bien escritos", sino estructuralmente blindados, se ha convertido en el factor diferenciador para la viabilidad de la investigación moderna.
+Para responder a este desafío, surgen enfoques avanzados como la Ingeniería de Contexto, que busca diseñar arquitecturas que controlen la lógica de la información.(Zhuang et al., 2025) 
+
+
+La evolución hacia Sistemas Agénticos y el uso de Grafos de Conocimiento ofrece una vía para representar explícitamente las reglas de un proyecto. La integración de estas tecnologías, apoyada por la eficiencia de Modelos de Lenguaje Pequeños (SLMs), abre la puerta a una nueva generación de asistentes capaces de validar la estructura profunda de una propuesta.
+
+Bajo este marco, el propósito central de este trabajo de grado es desarrollar un prototipo de sistema agéntico copiloto que incorpore una arquitectura de ingeniería de contexto basada en grafos de conocimiento(Ibrahim et al., 2024) y SLMs. La finalidad es asistir en la evaluación automatizada de la coherencia y consistencia de proyectos de investigación. Se busca crear una herramienta que actúe como un "garante metodológico", elevando el estándar de calidad de la producción científica y potenciando las posibilidades de éxito de los investigadores ante las exigencias de publicación y financiación actuales.
+
+Para alcanzar este propósito, se ha adoptado una metodología de tipo investigación aplicada con un componente de desarrollo tecnológico experimental. El estudio se estructura en cuatro fases secuenciales: el análisis de los criterios de coherencia, el diseño de un modelo ontológico (grafo de conocimiento), la implementación técnica de la arquitectura agéntica con SLMs, y finalmente, la evaluación del desempeño del prototipo mediante pruebas controladas.
+
+La propuesta de valor de este proyecto no sólo se centra en el uso aplicado de sistemas agenticos, sino en una estrategia de Ingeniería de contexto más elaborada y personalizada, que permita una coordinación, planeación, y visibilidad por parte del sistema enriquecida, que produzca resultados más acertados, mitigando las alucinaciones y garantizando la rigurosidad crítica que exige la formulación de proyectos de investigación en la frontera del conocimiento actual.
+
+\newpage
+\section{PLANTEAMIENTO DEL PROBLEMA}
+\vspace{-0.5cm}
+En los entornos actuales de investigación, la producción de documentos de carácter metodológico como propuestas de investigación y publicaciones científicas, exige integrar grandes volúmenes de información proveniente de fuentes heterogéneas. Estos documentos deben mantener consistencia entre objetivos, metodología y resultados, así como coherencia narrativa y conceptual a lo largo de múltiples secciones y demás referencias de trabajos relacionados. Sin embargo, la elaboración y revisión de este tipo de contenidos continúa siendo un proceso altamente demandante en tiempo y esfuerzo cognitivo, pues depende de la capacidad humana para organizar, relacionar y justificar información dispersa bajo criterios normativos y metodológicos específicos.(Miles, 2019)
+
+Las herramientas actuales de inteligencia artificial generativa, aunque han transformado las tareas de redacción y corrección, aún operan principalmente en el plano lingüístico. Su funcionamiento, basado en la predicción estadística de palabras, no les permite comprender
+ni mantener las relaciones causales o jerárquicas que definen la validez estructural de un proyecto. (Zhuang et al., 2025)
+Este fenómeno se conoce como amnesia contextual o estructural a largo plazo, y es crítico cuando el documento excede la ventana de contexto de los modelos, o cuando una modificación sutil en una sección genera una inconsistencia lógica en otra lejana. Las soluciones basadas únicamente en RAG (Generación Aumentada por Recuperación) abordan la factualidad, pero no la consistencia lógica interna del documento(Singh et al., 2025).
+
+La disciplina de la Ingeniería de Contexto emerge precisamente para resolver esta brecha, enfocándose en el diseño de arquitecturas que superan la amnesia contextual al alimentar los modelos con información estructurada y precisa en el momento. En este marco, la representación del conocimiento mediante Grafos de Conocimiento(Mohamed et al., 2025) (KG) ofrece una solución prometedora al permitir modelar las dependencias semánticas como una base de verdad dinámica (Ground Truth), facilitando la trazabilidad estructural. No obstante, la integración de esta arquitectura para la co-construcción y validación activa de documentos metodológicos aún representa un desafío de investigación.
+
+Paralelamente, la investigación en razonamiento automatizado y extracción de relaciones a nivel documental ha mostrado avances significativos desde hace varios años. Estudios(Nan et al., 2020) han demostrado que los modelos pueden inferir relaciones entre entidades distribuidas en múltiples oraciones, abriendo posibilidades para representar conexiones semánticas complejas. Otros trabajos(R. Li et al., 2022), han incorporado redes de grafos heterogéneos y mecanismos de atención, permitiendo modelar interdependencias entre conceptos y entidades dentro de un texto. Sin embargo, estas aproximaciones se han limitado a tareas de análisis de información, sin ser extrapoladas a procesos de construcción, revisión o co-construcción de documentos técnicos o científicos, donde la coherencia y la trazabilidad son críticas.
+
+Por otra parte, la evolución de los Sistemas Agénticos permite la orquestación de flujos de trabajo documentales complejos. Investigaciones como Verify-Agent [Chu et al., 2024] o MMA-RAG (Krayem et al., 2025)muestran el potencial de los agentes especializados para tareas de inspección y validación. Sin embargo, la implementación de estos sistemas se enfrenta a desafíos de eficiencia computacional y latencia en tareas de extracción. Para resolver esto, el uso de Modelos de Lenguaje Pequeños (SLMs), optimizados para la traducción de texto natural a formatos estructurados (Text-to-Graph), se presenta como una vía técnica para lograr la extracción semántica eficiente y el bajo costo operacional dentro del sistema agéntico.
+
+La convergencia de estos avances revela un vacío metodológico y tecnológico: la inexistencia de una arquitectura de Ingeniería de Contexto que utilice el KG como motor de estado y los SLMs como extractores eficientes para habilitar la Verificación Estructural Automatizada de documentos de investigación. La falta de este sistema de validación lógica impide a los profesionales y académicos aprovechar plenamente el poder generativo de la IA sin sacrificar la coherencia y el rigor.
+
+En paralelo, la evolución de la Inteligencia Artificial agéntica y los sistemas multi-agente plantea nuevas posibilidades para el procesamiento de conocimiento complejo. Investigaciones como Verify-Agent (Chu et al., 2024) muestran el potencial de varios agentes especializados que colaboran en tareas de inspección y validación de plantillas, mientras MMA-RAG(Krayem et al., 2025) introduce agentes capaces de combinar datos estructurados y no estructurados para gestionar información regulada. A su vez, las propuestas arquitectónicas como las de (Khamis, 2025) destacan la capacidad de estos sistemas para planificar, razonar y coordinar acciones de manera autónoma. Pese a ello, los desarrollos actuales se enfocan en dominios cerrados o experimentales, sin abordar la integración de agentes cognitivos y representaciones semánticas para la comprensión y co-estructuración de documentos de carácter metodológico mencionados.
+
+Esta búsqueda revela un vacío metodológico y tecnológico: la inexistencia de un marco que combine agentes de IA capaces de razonar con modelos explícitos de conocimiento (como grafos u ontologías) aplicados a la construcción, análisis y validación de documentos estructurados. La falta de herramientas de este tipo conlleva que las organizaciones y profesionales sigan dependiendo de procesos manuales, fragmentados y susceptibles de incoherencias o pérdidas de trazabilidad. 
+
+Explorar la convergencia entre IA agéntica y grafos de conocimiento representa, dentro de una estrategia avanzada de Ingeniería de Contexto, representa una oportunidad para crear un copiloto cognitivo que no solo redacte, sino que comprenda y razone sobre la estructura y el contenido de los documentos, detectando incoherencias, evaluando consistencia y manteniendo alineación entre las partes. Este tipo de sistema podría transformar la manera en que se desarrollan documentos técnicos, científicos o institucionales, fortaleciendo la eficiencia cognitiva y la calidad estructural de los resultados producidos.
+
+\subsection{Pregunta de Investigación}
+\vspace{-0.5cm}
+¿Cómo una estrategia de ingeniería de contexto basada en grafos de conocimiento, apoyada en modelos de lenguaje pequeños (SLMs), mejora la capacidad de un sistema agéntico para reducir las inconsistencias lógicas y fortalecer la coherencia y consistencia de propuestas de investigación?
+\newpage
+\section{OBJETIVOS}
+\vspace{-0.5cm}
+
+\subsection{Objetivo General}
+\vspace{-0.5cm}
+Desarrollar un prototipo de sistema agéntico copiloto que incorpore una arquitectura de ingeniería de contexto basada en grafos de conocimiento y Small Language Models (SLMs), para asistir la evaluación automatizada de la coherencia y consistencia de proyectos de investigación.
+
+\subsection{Objetivos Específicos}
+%\vspace{-0.5cm}
+\begin{enumerate}[label=\textbf{\thesubsection.\arabic*}, leftmargin=*, labelsep=1em, itemsep=0.5em, topsep=0.5em]
+    \item Analizar las estructuras y componentes de los proyectos de investigación, identificando los criterios de coherencia y consistencia relevantes para su evaluación automatizada.
+    
+    \item Diseñar un modelo semántico-ontológico, implementado como grafo de conocimiento, que represente las relaciones y dependencias lógicas entre los componentes estructurales de los proyectos de investigación.
+    
+    \item Implementar la arquitectura de ingeniería de contexto del sistema agentico copiloto, integrando el grafo de conocimiento y los Small Language Models (SLMs) para apoyar el procesamiento y estructuración del contenido textual.
+    
+    \item Validar el desempeño sistémico y la efectividad del prototipo agéntico para diagnosticar y fortalecer la coherencia y consistencia metodológica de proyectos de investigación, mediante la aplicación de técnicas especializadas de evaluación de LLM y sistemas agénticos en un entorno controlado.
+\end{enumerate}
+
+
+\newpage
+\section{JUSTIFICACIÓN Y ALCANCE}
+\vspace{-0.5cm}
+La creación de documentos extensos es una actividad central en contextos académicos y profesionales, y sus deficiencias suelen derivarse más de la fragmentación del conocimiento que de la falta de información disponible. En los proyectos de investigación, la coherencia entre problema, objetivos, metodología y marco teórico depende de mantener una representación estable de las decisiones conceptuales, algo que los sistemas actuales de asistencia basados en modelos de lenguaje no logran con solidez, pues operan principalmente sobre texto plano y carecen de mecanismos para preservar conocimiento estructurado. Esto limita su capacidad para validar coherencia interna, verificar consistencia lógica y contextualizar el contenido frente a metas, restricciones, y referencias definidas por el investigador.
+
+En este contexto, una estrategia de ingeniería de contexto basada en grafos de conocimiento y Small Language Models (SLMs, modelos de lenguaje pequeños) ofrece una oportunidad para dotar a los sistemas agénticos de un entendimiento más aterrizado (grounded), apoyado en estructuras semánticas y referencias explícitas. Integrar un enfoque agéntico con una base de conocimiento estructurada permite distribuir tareas cognitivas como la verificación de coherencia entre secciones, la evaluación de consistencia terminológica y conceptual, y la comprobación de que las afirmaciones del documento se encuentran respaldadas por la literatura relevante seleccionada por el usuario. El grafo de conocimiento actúa como memoria contextual y soporte de razonamiento, mientras agentes especializados coordinan lectura, extracción, contraste y verificación, en línea con arquitecturas que combinan agentes y razonamiento simbólico para tareas de planificación o validación en dominios específicos (Bonifazi et al., 2025).
+
+El presente trabajo se enfoca en el desarrollo de una estrategia de ingeniería de contexto orientada a la evaluación y verificación contextual de proyectos de investigación, con dos capacidades principales del sistema agéntico copiloto: (i) evaluar la coherencia y consistencia interna entre los componentes estructurales del proyecto y (ii) contrastar dichos componentes con un conjunto de artículos y referencias aportadas por el usuario, valorando su relevancia y alineación temática. El alcance se limita a un escenario controlado de proyectos de investigación académica, con un conjunto acotado de componentes y referencias, sin pretender cubrir todo el ciclo de vida de la investigación ni sustituir el criterio del investigador. En cambio, se busca ofrecer un copiloto especializado en detectar inconsistencias lógicas, desalineaciones conceptuales y debilidades de soporte bibliográfico.
+
+ El desarrollo de un prototipo bajo estos lineamientos permitirá avanzar hacia sistemas capaces de interpretar, estructurar y revisar conocimiento de forma más cercana al razonamiento humano, reduciendo la carga de revisión manual y mejorando la trazabilidad de las decisiones conceptuales, a la vez que genera evidencia empírica sobre la efectividad de la estrategia de ingeniería de contexto y sienta bases para escalar, en el mediano plazo, hacia un ecosistema más amplio de apoyo a la investigación.
+\newpage
+\section{ANTECEDENTES Y ESTADO DEL ARTE}
+\vspace{-0.5cm}
+En esta subsección se debe realizar una revisión de la literatura (de artículos científicos en inglés de los últimos 5 años, cantidad mínimo 10) existente sobre los estudios previos relacionados con el problema en estudio, los instrumentos que utilizaron para la solución del problema y los resultados que se obtuvieron. Esta revisión se debe realizar a nivel regional, nacional e internacional.
+
+\newpage
+\section{MARCO TEÓRICO}
+\vspace{-0.5cm}
+En esta subsección se presentan los referentes teóricos (Conceptos, definiciones) además, tener en cuenta que el marco teórico de una tesis de maestría en profundización consiste en la fundamentación académica y técnica que sustenta el proyecto, integrando los conceptos, teorías, modelos y enfoques relevantes que explican y contextualizan el problema abordado, así como las soluciones propuestas.
+
+\newpage
+\section{DISEÑO METODOLÓGICO}
+\vspace{-0.5cm}
+Esta sección hace referencia a la elaboración de una estrategia que permita obtener la información deseada y se enfoque en dar respuesta a la formulación del problema, de manera que se garantice la recolección, análisis y tratamiento de la información.
+
+Debe reflejar la estructura lógica del proceso de investigación, y la articulación entre los objetivos del estudio y los procedimientos metodológicos para cumplir dichos objetivos. Describir: ¿Cuáles son los instrumentos que utilizaran para recoger la información?, ¿Cómo organizarán y analizarán la información?
+
+Se aconseja describir la metodología que se desarrollará por fases o etapas las cuales se encuentren directamente relacionadas con los objetivos específicos.
+
+\subsection{Cronograma}
+\vspace{-0.5cm}
+Determine las actividades a desarrollar en el proyecto de acuerdo a la metodología definida para el logro de los objetivos y alcances del proyecto. (Precisar en: Procesos, fases y acciones, definiendo los tiempos probables de cada una de ellas. Se recomienda utilizar semanas como unidades de tiempo para la planeación.)
+
+\subsection{Resultados Esperados}
+\vspace{-0.5cm}
+Los resultados esperados de investigación en una tesis de maestría en profundización representan los productos concretos, logros o transformaciones que se anticipa alcanzar como consecuencia directa del desarrollo del proyecto. Estos resultados deben estar íntimamente vinculados con los objetivos formulados, tanto generales como específicos, y responder de forma coherente a la problemática y la pregunta de investigación planteadas.
+
+\begin{enumerate}
+    \item Relación con los objetivos: Para definir los resultados esperados, se parte de los objetivos específicos. Cada objetivo debe proyectar un resultado tangible o verificable. Por ejemplo, si uno de los objetivos es “Diseñar una herramienta basada en inteligencia artificial para optimizar la atención al cliente en una entidad financiera”, un resultado esperado coherente sería: “Una herramienta funcional validada en un entorno controlado que demuestre mejoras en tiempos de respuesta y satisfacción del cliente”.
+\item Características de los resultados esperados. Los resultados deben ser:
+\begin{itemize}
+    \item Concretos y verificables: deben poder demostrarse mediante evidencias (datos, informes, prototipos, análisis comparativos, entre otros).
+    \item Relevantes y pertinentes: deben tener un impacto claro sobre el contexto del problema abordado.
+    \item Alineados con la modalidad de profundización: en esta modalidad, los resultados se orientan principalmente a la solución de problemas reales, el desarrollo de productos, servicios o procesos innovadores, o la aplicación de conocimientos especializados en contextos específicos. Al ser proyectos de nivel de maestría, también se esperan resultados relacionados con producción intelectual como artículos en revista y/o conferencias.
+\end{itemize}
+\item Tipos de resultados esperados. Dependiendo del enfoque del proyecto, los resultados pueden incluir:
+\begin{itemize}
+    \item Prototipos funcionales o sistemas implementados.
+    \item Modelos o metodologías aplicadas a un caso específico.
+    \item Manuales, guías o recomendaciones basadas en evidencia.
+    \item Mejoras medibles en procesos o indicadores clave.
+    \item Informes de validación, pruebas de usabilidad o análisis de impacto.
+\end{itemize}
+
+Los resultados esperados actúan como una guía que orienta el trabajo práctico de la tesis, facilitando la toma de decisiones metodológicas y la evaluación del impacto del proyecto. Además, permiten a los evaluadores comprender la contribución concreta del trabajo en términos de innovación, aplicabilidad y resolución de problemas.
+\end{enumerate}
+
+\newpage
+\section{RECURSOS Y ASPECTOS ECONÓMICOS}
+\vspace{-0.5cm}
+\begin{tabularx}{\textwidth}{|p{0.25\textwidth}|X|}
+\hline
+{\textbf{TIPO DE RECURSO}} & \textbf{DESCRIPCIÓN} \\
+\hline
+Capital Humano & Describir el personal involucrado en el proyecto, Director de Proyecto, trabajadores de la empresa o del objeto estudio.\\
+\hline
+Tecnologías Blandas & Describir los recursos o elementos intangibles, por ejemplo software especializado, metodologías, herramientas, entre otros. \\
+\hline
+Tecnologías Duras & Describir los recursos o elementos tangibles por ejemplo computadores, GPS, cámaras fotográficas, entre otros. \\
+\hline
+Infraestructura & Describir las locaciones que se utilizarán para el desarrollo del proyecto, por ejemplo laboratorios, empresas, entre otros. \\
+\hline
+Financieros & Describir si la financiación es propia, a través de la UAO o externa, describir para que se utilizarán los recursos, por ejemplo visitas al objeto estudio. \\
+\hline
+\end{tabularx}
+
+Se sugiere indicar claramente la fuente de financiación. Las fuentes podrán ser entre otras:
+\begin{enumerate}
+    \item Financiación propia: Esto implica que los costos del proyecto serán cubiertos por los proponentes.
+    \item Financiación UAO: esto implica que los costos del proyecto serán cubiertos por la Universidad Autónoma de Occidente.
+    \item Financiación Externa: esto implica que los costos del proyecto de grado serán cubiertos por una entidad externa.
+\end{enumerate}
+
+
+\newpage
+\renewcommand{\refname}{REFERENCIAS}
+\addcontentsline{toc}{section}{REFERENCIAS}
+% si tiene el archivo .bib descomente las siguientes líneas y comente el entorno thebibliography
+\bibliographystyle{apalike}
+\bibliography{TuArchivo}
+
+Ejemplo de como citar:
+
+La neurociencia ha contribuido de manera significativa al entendimiento de la base neural de la toma de decisiones, que a menudo es considerada como un problema demasiado amplio para ser tratado \citep{Amaral00}. Amaral describe los primeros avances en la investigaci\'on de los mecanismos neuronales de la toma de decisiones y presenta una imagen del procesamiento neuronal en las regiones prefrontales que es relevante para la toma de decisiones complejas en seres humanos. \cite{Bentley09} sugieren que la\citep{Vaswani2017} conectividad de los ganglios basales es ideal para la selecci\'on de acciones \'optimas para estados cognitivos y de contexto dados. Ellos proponen un modelo a nivel de sistemas de los ganglios basales que intenta cerrar la brecha entre la anatom\'{i}a y la funci\'on autom\'atica de la toma de decisiones. Otras investigaciones que involucran los ganglios basales en la toma de decisiones fueron presentadas en \citep{Alysson06,Audi96,Serre05}.
+
+Juli\'an Hurtado-L\'opez, David F. Ram\'{i}rez-Moreno and Terrence J. Sejnowski. (2017). Decision-making neural circuits mediating social behaviors: An attractor network model. \textit{Journal of Computational Neuroscience}, 43(2):127-142 (\url{http://dx.doi.org/10.1007/s10827-017-0654-8}).
+
+%\begin{thebibliography}{99}
+%\vspace{-0.5cm}
+%\bibitem{Nombre1} Autor, "Título del Articulo," \textit{Título de la revista}, vol., no., p. Mes, Año.
+%\bibitem{Nombre2} Autor, \textit{Título del libro}, vol., ed., Lugar de publicación: Editorial, p.  Año.
+%\end{thebibliography}
+Para elaborar las referencias de acuerdo a los parámetros de la Universidad se recomienda revisar las Guías CRAI.
+
+Debe relacionar el principal material bibliográfico utilizado para estructurar la propuesta priorizando artículos científicos en inglés, documentos gubernamentales y fuentes confiables.
+
+Se debe listar según formato de la norma APA o IEEE vigente, el apoyo bibliográfico que sirvió de apoyo para la elaboración del anteproyecto.
+
+Es necesario que la norma APA o IEEE se aplique con rigurosidad. Se recomienda el uso de gestores bibliográficos como Mendeley o Zotero, etc. para las normas APA.
+
+\newpage
+\section*{ANEXOS}
+\vspace{-0.5cm}
+\addcontentsline{toc}{section}{ANEXOS}
+Los Anexos son documentos o elementos que complementan el cuerpo del trabajo y que se relacionan, directa o indirectamente, con la investigación, tales como facturas, cd, normas, matrices, cronograma etc.\par 
+Los anexos deben ir numerados con letras.\par 
+Este capítulo es opcional, si lo utiliza: inserte los títulos como los títulos de las tablas y figuras pero se enumeran con letras.\par Estos títulos van justificados y con mayúscula inicial.
+
+\newpage
+
+{
+\extrarowheight = -0.3ex
+\renewcommand{\arraystretch}{1.8}
+
+\begin{table}[H]
+    \centering
+    \caption{} \vspace{5mm}
+    \textbf{Tabla con Títulos en las columnas} \vspace{7mm}
+   
+        \begin{tabular}{cccc}
+        \hline
+        Titulo1 & Titulo2 & Titulo3 & Titulo4  \\
+        \hline
+            150        & 210       & 130        & 1 \\
+            1        & 1        & 1        & 1 \\
+            1        & 1        & 1        & 1 \\
+        \hline
+        \end{tabular}
+    \label{TablaI}
+\end{table}}
+
+AGREGANDO UNA FIGURA
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=1]{Figuras/buzz}
+  \caption{Escriba aquí el nombre de la figura y si es de otro autor coloque el número de referencia}
+\vspace{-0.5cm}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=1]{Figuras/TG}
+  \caption{Escriba aquí el nombre de la figura y si es de otro autor coloque el número de referencia}
+\vspace{-0.5cm}
+\end{figure}
+
+
+AGREGAR VARIAS FIGURAS AGRUPADAS
+
+\begin{figure}[H]
+     \centering
+     \begin{subfigure}{0.3\textwidth} % Define el ancho de la subfigura
+         \centering
+         \includegraphics[scale=1]{Figuras/fig1.png}
+         \caption{Nombre fig1} % Mueve la leyenda aquí
+         \label{fig1}
+     \end{subfigure}
+     \hfill % Espacio horizontal flexible
+     \begin{subfigure}{0.3\textwidth}
+         \centering
+         \includegraphics[scale=1]{Figuras/fig2.png}
+         \caption{Nombre fig2}
+         \label{fig2}
+     \end{subfigure}
+     \hfill
+     \begin{subfigure}{0.3\textwidth}
+         \centering
+         \includegraphics[scale=1]{Figuras/fig3.png}
+         \caption{Nombre fig3}
+         \label{fig3}
+     \end{subfigure}
+     \caption{Tres gráficas} % Leyenda principal
+     \label{Tres gráficas}
+\vspace{-0.5cm}
+\end{figure}
+
+
+
+La din\'amica de la nueva red es modelada por el sistema din\'amico introducido por las ecuaciones \eqref{ComplexM1}-\eqref{ComplexM5} como sigue.
+\begin{align}
+	\tau_1\frac{dx_1}{dt}&=-x_1+f_1(w_{11}x_1-w_{12}x_2+L_1),\label{ComplexM1}\\
+	\tau_2\frac{dx_2}{dt}&=-x_2+f_2(-w_{21}x_1-w_{22}x_2+L_2),\label{ComplexM2}\\
+	\tau_3\frac{dx_3}{dt}&=-x_3+f_3(w_{32}x_2+w_{33}x_3-w_{34}x_4-w_{35}x_5),\label{ComplexM3}\\
+	\tau_4\frac{dx_4}{dt}&=-x_4+f_4(w_{42}x_2-w_{43}x_3+w_{44}x_4-w_{45}x_5),\label{ComplexM4}\\ 
+	\tau_5\frac{dx_5}{dt}&=-x_5+f_5(-w_{51}x_1+w_{53}x_3-w_{54}x_4+w_{55}x_5).\label{ComplexM5}
+\end{align}
+\end{document}
