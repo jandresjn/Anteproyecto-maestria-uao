@@ -30,6 +30,16 @@
 \usepackage{xcolor}
 \usepackage{tabularx} % Necesario para el tipo de columna X
 \usepackage{enumitem}
+\usepackage{pgfgantt}
+\usepackage{tikz}
+
+
+\usepackage[table]{xcolor}
+\definecolor{azulUAO}{HTML}{215C98}
+\definecolor{azulUAO2}{HTML}{a6c9ec}
+
+\usepackage{rotating}
+
 \fancyhead{}
 \fancyfoot[c]{\thepage}
 
@@ -141,7 +151,7 @@
 \textbf{Nombre Estudiante} & Jorge Andrés Jaramillo Neme\\\hline 
 \textbf{Programa Académico} & Maestría en IA y Ciencia de Datos \\\hline
 \textbf{Cédula} & 1.144.084.317 \\\hline
-\textbf{Código Estudiantil} & Pendiente \\\hline
+\textbf{Código Estudiantil} & 22505049 \\\hline
 \textbf{Correo} & Jorge\_and.jaramillo@uao.edu.co \\\hline
 \end{tabularx}
 
@@ -331,77 +341,424 @@ El presente trabajo se enfoca en el desarrollo de una estrategia de ingeniería 
 \newpage
 \section{ANTECEDENTES Y ESTADO DEL ARTE}
 \vspace{-0.5cm}
-En esta subsección se debe realizar una revisión de la literatura (de artículos científicos en inglés de los últimos 5 años, cantidad mínimo 10) existente sobre los estudios previos relacionados con el problema en estudio, los instrumentos que utilizaron para la solución del problema y los resultados que se obtuvieron. Esta revisión se debe realizar a nivel regional, nacional e internacional.
+
+El desarrollo de los modelos basados en la arquitectura Transformer(Vaswani et al., 2017) marcó un cambio estructural en la forma en que la inteligencia artificial aborda la comprensión y generación del lenguaje natural. A diferencia de las redes recurrentes y convolucionales, los Transformers utilizan mecanismos de atención que permiten procesar relaciones entre todas las partes de una secuencia en paralelo, lo cual amplió drásticamente la capacidad para capturar dependencias a largo plazo y contextos extensos. Esta innovación dio origen a los Large Language Models (LLMs), como GPT, BERT o T5, que demostraron un comportamiento emergente(Ouyang et al., n.d.) de razonamiento, planificación y adaptación contextual que antes no estaba presente en modelos puramente estadísticos.
+
+Los LLMs introdujeron la posibilidad de modelar tareas complejas de manera unificada, sin requerir entrenamiento específico para cada una, mediante el uso de prompting y aprendizaje en contexto. Estos avances sentaron las bases para la creación de agentes inteligentes basados en lenguaje, capaces de interpretar instrucciones y ejecutar acciones, trascendiendo la generación textual hacia la resolución de problemas autónomos, lo cual ha ido mejorando en su asertividad para resolver problemas complejos con modelos razonadores. En este punto surge la noción de AI Agent, entendida como una entidad que utiliza un modelo de lenguaje como núcleo cognitivo para interactuar con su entorno, tomar decisiones y cumplir objetivos definidos a partir de la comprensión de instrucciones textuales (Acharya et al., 2025)
+
+El concepto de agente basado en LLM evolucionó hacia arquitecturas más complejas denominadas Agentic AI Systems, las cuales integran múltiples agentes especializados que colaboran para alcanzar metas compartidas. Estos sistemas combinan módulos de razonamiento, memoria y planificación, y se apoyan en mecanismos de comunicación interna para coordinar decisiones. El enfoque agentic trasciende la idea de un único modelo que responde, incorporando la capacidad de reflexión, división del trabajo y evaluación mutua entre agentes (Khamis, 2025)
+
+Mientras los agentes tradicionales operan bajo entornos cerrados con objetivos definidos, los sistemas agénticos incorporan componentes de autonomía adaptativa y aprendizaje continuo. De acuerdo con la revisión conceptual de (Khamis, 2025)un sistema agéntico puede incluir módulos de memoria semántica, episódica y procedimental, mecanismos de handoff para transferencia de contexto, y cueing para activación contextual de agentes, características que les otorgan la capacidad de planificar, razonar y autoevaluarse durante la ejecución de tareas.
+
+El estudio de la agenticidad en inteligencia artificial también ha motivado el desarrollo de marcos de referencia para la evaluación de estos sistemas, considerando métricas que van más allá de la exactitud de salida. Las recientes encuestas en el campo (Yehudai et al., n.d.)proponen clasificaciones que incluyen la evaluación de razonamiento multietapa, uso de herramientas, reflexión y persistencia de memoria, consolidando así una base conceptual que describe la transición de modelos de lenguaje a sistemas con comportamiento autónomo coordinado.
+
+
+La arquitectura de Retrieval-Augmented Generation(Lewis et al., n.d.) (RAG) surgió como respuesta al problema de las alucinaciones(Xi et al., 2023) y la falta de actualización de los LLMs. Este modelo combina un recuperador externo con un generador interno, de modo que las respuestas no dependen exclusivamente del conocimiento estático aprendido durante el entrenamiento. El componente de recuperación selecciona fragmentos relevantes de un corpus o base de conocimiento, mientras el generador produce la salida final integrando la información obtenida(Singh et al., 2025)).
+
+En sus primeras implementaciones, RAG utilizó recuperadores clásicos como BM25, basados en coincidencias de términos. Más adelante, los métodos de recuperación densa permitieron representar tanto las consultas como los documentos en un espacio vectorial común, mejorando la pertinencia semántica de los resultados. Estos avances dieron paso a modelos integrados, en los que la recuperación y la generación se entrenan conjuntamente, reduciendo inconsistencias y aumentando la coherencia entre las fuentes consultadas y la respuesta final (Singh et al., 2025)
+
+No obstante, RAG también enfrenta limitaciones. Entre las más relevantes se encuentran la fragmentación del contexto (al integrar fragmentos dispersos sin una estructura explícita) y la dificultad para manejar consultas complejas que requieren razonamiento encadenado o comprensión estructural. Además, el sistema depende fuertemente de la calidad y cobertura de las bases de conocimiento, lo que puede introducir sesgos o información desactualizada (Singh et al., 2025)
+
+Para abordar estos problemas, se propusieron extensiones que incorporan reranqueadores (Rerankers) y mecanismos de reflexión. Los reranqueadores priorizan los fragmentos más relevantes tras la recuperación inicial, utilizando modelos especializados o el propio LLM como evaluador. Por su parte, los módulos reflexivos verifican la consistencia del contexto antes de la generación definitiva, evaluando la pertinencia de las fuentes recuperadas (Z. Li et al., 2025)
+Una evolución significativa de este paradigma es GraphRAG, que sustituye la recuperación basada en texto plano por una recuperación estructurada sobre grafos de conocimiento. En este enfoque, la información se representa mediante entidades, relaciones y propiedades interconectadas, lo que permite consultas semánticas y razonamiento multihop. Según la documentación técnica (Intro to GraphRAG), el proceso se compone de tres fases: extracción de entidades y relaciones, indexación del grafo en una base semántica, y recuperación contextual combinada con el generador.
+
+GraphRAG mejora la interpretabilidad y la trazabilidad de las respuestas, ya que cada fragmento generado puede vincularse a las entidades de origen dentro del grafo. Asimismo, resuelve parcialmente la fragmentación del contexto, permitiendo inferencias sobre relaciones indirectas y dependencias jerárquicas. En ámbitos donde la coherencia conceptual es crítica, como en documentos metodológicos, esta integración ofrece ventajas sustanciales para el análisis de consistencia interna y verificación contextual (Colombo, 2024)
+
+En etapas más recientes, el paradigma evoluciona hacia Agentic RAG, donde distintos agentes desempeñan roles específicos: algunos encargados de recuperar información, otros de verificar la coherencia y otros de sintetizar los resultados finales. Esta orquestación permite incorporar mecanismos de memoria compartida, reflexión distribuida y revisión cooperativa antes de la respuesta. De esta forma, la generación aumentada deja de ser un proceso lineal y se convierte en una interacción iterativa entre agentes especializados (Acharya et al., 2025)
+
+El razonamiento multihop o multiescalón es una capacidad esencial para la comprensión compleja y la verificación contextual. Este tipo de razonamiento requiere que un sistema combine información proveniente de múltiples fuentes o pasos intermedios para responder correctamente una consulta. A diferencia del razonamiento directo, que se basa en una única evidencia, el multihop permite inferir relaciones indirectas a través de trayectorias lógicas o semánticas SMORE (Ren et al., 2022).
+
+Los modelos diseñados para razonamiento multihop enfrentan desafíos de escalabilidad, especialmente en grandes grafos de conocimiento o colecciones textuales extensas. El enfoque propuesto por SMORE optimiza la búsqueda bidireccional de trayectorias, utilizando paralelización y estrategias de muestreo que reducen el costo computacional sin sacrificar precisión. Este tipo de arquitectura demuestra que la inferencia encadenada puede mantenerse eficiente incluso en contextos con millones de entidades interconectadas (Ren et al., 2022).
+
+En el ámbito documental, la utilidad del razonamiento multihop radica en la capacidad de vincular distintas secciones de un texto o distintas versiones de un mismo concepto. Por ejemplo, un sistema que analiza un proyecto de investigación puede determinar si los objetivos derivan adecuadamente de la pregunta planteada, o si la metodología corresponde con las hipótesis formuladas. Este tipo de inferencia, que requiere combinar pasos intermedios, resulta clave para medir la coherencia estructural de un documento.
+
+Los grafos de conocimiento constituyen una de las estructuras más relevantes para representar y organizar información compleja. Su formato de tripletas (sujeto, predicado, objeto) permite describir hechos, entidades y relaciones de forma explícita. En la actualidad, los grafos se utilizan no solo como bases de datos semánticas, sino como componentes de razonamiento dentro de sistemas híbridos simbólico-subsimbólicos (Sardina et al., 2024).
+
+Los estudios recientes sobre su estructura y desempeño muestran que factores como el grado de los nodos, la frecuencia de las relaciones y la co-frecuencia de entidades influyen en la calidad de las incrustaciones y en el rendimiento de los modelos de predicción. Un análisis detallado de estos aspectos (Sardina et al., 2024),señala que las distribuciones de grado sesgadas tienden a favorecer la representación de nodos centrales, lo que genera sesgos en tareas de razonamiento o recomendación.
+
+En el ámbito académico y científico, los grafos de conocimiento especializados han ganado importancia como herramientas para integrar literatura, conceptos y relaciones temáticas. Un ejemplo representativo es (Dessí et al., 2025)que compila más de veinticinco millones de entidades del dominio de la informática, permitiendo consultas semánticas y exploración multihop. Este tipo de infraestructuras evidencia el potencial de los KGs para servir como memoria estructurada en sistemas de análisis o generación asistida.
+El vínculo entre los grafos de conocimiento y los sistemas agénticos se vuelve especialmente relevante cuando los primeros se utilizan como fuente de memoria a largo plazo. En ese contexto, los agentes no solo recuperan información, sino que razonan sobre la estructura del grafo, actualizan nodos y relaciones, y verifican consistencia. Así, los KGs dejan de ser bases pasivas de datos para convertirse en componentes activos de la cognición artificial (Colombo, 2024)
+
+La aplicación de arquitecturas de IA a la creación y manipulación de documentos ha avanzado significativamente con la aparición de sistemas copiloto. Estos entornos combinan modelos de lenguaje, planificación y ejecución de código para automatizar tareas de lectura, edición y verificación. Uno de los desarrollos más destacados es Docpilot (Mathur et al., n.d.)presentado por Adobe Research, que demuestra cómo un modelo de lenguaje puede planificar secuencias de acciones, verificar resultados intermedios y autocorregirse con base en errores detectados.
+
+En Docpilot (Mathur et al., n.d.)el sistema se compone de cuatro fases: planificación de tareas, verificación y autocorrección, interacción con el usuario y ejecución mediante generación de código. Esta estructura encarna de manera temprana el principio de agencia dentro del procesamiento documental, donde el modelo no solo genera texto, sino que coordina herramientas y ejecuta acciones con retroalimentación automática.
+
+Estos avances muestran la transición de modelos pasivos a sistemas interactivos orientados a objetivos. En entornos académicos, este tipo de herramientas puede evolucionar hacia copilotos cognitivos capaces de analizar la estructura de un proyecto de investigación, verificar la coherencia entre secciones y sugerir mejoras semánticas o metodológicas. La integración con grafos de conocimiento y con arquitecturas agénticas abre la posibilidad de desarrollar sistemas de asistencia que razonen sobre el documento, comprendan su contexto y mantengan coherencia entre versiones y revisiones.
+
 
 \newpage
 \section{MARCO TEÓRICO}
 \vspace{-0.5cm}
-En esta subsección se presentan los referentes teóricos (Conceptos, definiciones) además, tener en cuenta que el marco teórico de una tesis de maestría en profundización consiste en la fundamentación académica y técnica que sustenta el proyecto, integrando los conceptos, teorías, modelos y enfoques relevantes que explican y contextualizan el problema abordado, así como las soluciones propuestas.
+La presente investigación se enmarca en el estudio de la integración entre los sistemas agénticos basados en inteligencia artificial, los grafos de conocimiento y las técnicas de razonamiento contextual. Su propósito es explorar cómo estas tecnologías pueden combinarse para asistir en la creación y verificación estructural de documentos de carácter metodológico, como los proyectos de investigación.
 
+El trabajo se apoya en tres ejes conceptuales principales:
+
+El primero corresponde a los sistemas agénticos, entendidos como arquitecturas compuestas por agentes inteligentes capaces de razonar, planificar y cooperar para cumplir tareas complejas. El segundo eje se relaciona con los grafos de conocimiento, que permiten representar de manera estructurada las relaciones entre conceptos, secciones y evidencias dentro de un dominio determinado. El tercer eje aborda los enfoques de razonamiento contextual y recuperación aumentada (RAG y GraphRAG), que combinan la generación de lenguaje con la recuperación de información relevante desde fuentes estructuradas.
+
+En este marco, resulta necesario describir y analizar los fundamentos de cada una de estas áreas: los principios de funcionamiento de los sistemas agénticos, los modelos ontológicos y de representación semántica propios de los grafos de conocimiento, las bases de los métodos de generación aumentada por recuperación y las técnicas de razonamiento multihop empleadas para la verificación contextual de información.
+
+5.1	Sistemas Agenticos versus Agentes de AI
+
+Los sistemas agénticos basados en inteligencia artificial, conocidos como Agentic AI Systems, representan una evolución reciente en el desarrollo de arquitecturas cognitivas que combinan modelos de lenguaje avanzados con componentes de razonamiento, memoria y control autónomo. 
+
+A diferencia de los AI Agents tradicionales, que se definen como entidades individuales diseñadas para ejecutar tareas específicas bajo reglas preestablecidas, los sistemas agénticos constituyen un conjunto coordinado de agentes especializados que interactúan entre sí dentro de una arquitectura estructurada y orientada a objetivos.
+
+Un sistema agéntico se concibe como una entidad compuesta por múltiples módulos funcionales que colaboran de forma dinámica para resolver problemas complejos. Según Khamis (2025), la estructura básica de estos sistemas integra tres niveles principales: el nivel de percepción y comprensión del entorno, el nivel de razonamiento y planificación, y el nivel de acción o ejecución. Cada uno de estos niveles está asistido por memorias que almacenan información semántica, contextual y procedimental, permitiendo que el sistema aprenda de la experiencia y mantenga coherencia a lo largo de distintas interacciones.
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=1]{Figuras/foto1_anteproyecto.png}
+  \caption{Tomado de (Sapkota et al 2025)}
+\vspace{-0.5cm}
+\end{figure}
+
+Los componentes estructurales más representativos de un sistema agéntico son los siguientes:
+
+Modelo base o núcleo cognitivo: normalmente un modelo de lenguaje o razonamiento (LLM o LRM) que interpreta instrucciones, genera hipótesis y produce salidas lingüísticas o simbólicas.
+
+Módulos cognitivos especializados: agentes encargados de tareas concretas como lectura, análisis, evaluación o verificación. Estos módulos pueden operar en paralelo y coordinarse mediante mecanismos de intercambio de contexto.
+
+Sistema de memoria: compuesto por memorias semánticas, episódicas y procedimentales. La memoria semántica contiene conocimiento estable y estructurado; la episódica conserva experiencias o resultados de interacciones anteriores; la procedimental almacenas estrategias de resolución de tareas.
+
+Mecanismos de coordinación: permiten la comunicación entre agentes y el control de flujo de información. Entre ellos se incluyen procesos de handoff (transferencia de tareas entre agentes) y cueing (activación contextual de un agente según la situación).
+Entorno de acción: capa donde el sistema ejecuta operaciones o interactúa con fuentes externas, como bases de datos, grafos de conocimiento o sistemas de usuario.
+
+Esta organización modular y jerárquica diferencia a los sistemas agénticos de los AI Agents convencionales. Mientras que un agente aislado ejecuta funciones puntuales dentro de un contexto limitado, un sistema agéntico dispone de una estructura de control y memoria compartida que le permite razonar de forma iterativa, autoevaluar sus decisiones y coordinar múltiples procesos cognitivos. De este modo, los sistemas agénticos pueden asumir comportamientos más autónomos, sostenidos en la integración de datos estructurados, retroalimentación y planificación adaptativa.
+Bandi et al. (2025) destacan además que los sistemas agénticos incorporan mecanismos de evaluación interna que les permiten verificar su propio desempeño, garantizando consistencia en las respuestas y alineación con objetivos predefinidos. Esta capacidad de autorregulación y aprendizaje continuo los posiciona como un marco conceptual distinto de los agentes individuales, extendiendo el alcance de la inteligencia artificial desde la ejecución de tareas hacia la gestión dinámica de conocimiento y razonamiento contextual.
+
+
+5.2	Grafos de conocimiento
+
+
+Los grafos de conocimiento representan información mediante una estructura compuesta por nodos y aristas dirigidas, expresadas generalmente como tripletas formadas por un sujeto, un predicado y un objeto. Este modelo permite describir relaciones semánticas de manera formal y navegable, facilitando el razonamiento sobre los vínculos existentes entre los elementos de un dominio. 
+
+\begin{figure}[H]
+\centering
+  \includegraphics[scale=1]{Figuras/foto2_anteproyecto.png}
+  \caption{Tomado de: Software Projects by the Smart Data Analytics (SDA) Research Group}
+\vspace{-0.5cm}
+\end{figure}
+
+Según Sardina, Kelleher y O’Sullivan (2024), los grafos de conocimiento han adquirido relevancia en contextos de aprendizaje automático y razonamiento simbólico debido a su capacidad para combinar representación estructurada y análisis cuantitativo. A partir de ellos se derivan los modelos de incrustación de grafos de conocimiento (Knowledge Graph Embedding Models), que proyectan la estructura del grafo a un espacio vectorial continuo, preservando la información relacional. 
+
+Estos modelos permiten realizar predicciones de enlaces, inferencias o recomendaciones basadas en la proximidad semántica de las entidades.
+
+El desempeño de los modelos de incrustación depende en gran medida de las propiedades estructurales del grafo. Los estudios de Rossi et al. (2020) y Bonner et al. (2022) muestran que métricas como el grado de los nodos, la frecuencia de las relaciones y la cofrecuencia de entidades influyen directamente en la calidad del aprendizaje. Grafos con alta dispersión de grados tienden a favorecer la predicción de nodos con mayor conectividad, mientras que aquellos con baja densidad relacional dificultan la generalización.
+
+Sardina et al. (2024) señalan que la estructura del grafo determina la forma en que los modelos de incrustación aprenden representaciones y que la topología influye incluso en la elección de hiperparámetros y en la estabilidad del proceso de entrenamiento. 
+Estas observaciones resaltan la importancia de un diseño ontológico cuidadoso al construir un grafo de conocimiento, especialmente en dominios donde la consistencia semántica es esencial, como los documentos de investigación.
+
+En el ámbito de la modelación conceptual, los grafos de conocimiento se apoyan en ontologías, que establecen clases, relaciones jerárquicas y restricciones lógicas. Las ontologías permiten definir el vocabulario de un dominio y especificar cómo los conceptos se relacionan entre sí, de modo que el grafo resultante no sea solo una red de datos, sino una representación formal del conocimiento.
+
+
+
+5.3	Retrieval-Augmented Generation (RAG)
+
+
+La generación aumentada por recuperación, o Retrieval-Augmented Generation (RAG), es una arquitectura híbrida que combina técnicas de recuperación de información con modelos de generación de lenguaje. Su principio central consiste en vincular la capacidad expresiva de los modelos generativos con fuentes externas de conocimiento, de modo que el texto producido esté respaldado por información factual y actualizada.
+
+El esquema básico de RAG se compone de dos módulos. El primero es el recuperador, que localiza documentos o fragmentos relevantes desde una base de conocimiento o corpus externo. El segundo es el generador, que sintetiza la respuesta final a partir de la información obtenida. Este proceso permite que la generación de texto no dependa únicamente del conocimiento interno del modelo, mitigando los errores y las llamadas alucinaciones propias de los modelos entrenados de forma cerrada.
+
+En sus primeras versiones, RAG utilizó métodos clásicos de recuperación basados en coincidencia de palabras clave, como BM25. Posteriormente, estos fueron sustituidos por técnicas de recuperación densa, en las que tanto las consultas como los documentos se representan en espacios vectoriales. Este cambio permitió realizar búsquedas semánticas más precisas, en las que la similitud se evalúa por significado y no por coincidencia léxica. Modelos posteriores integraron ambos procesos, entrenando conjuntamente el recuperador y el generador, lo que mejoró la coherencia entre la información recuperada y la respuesta producida.
+
+A pesar de estos avances, los sistemas RAG presentan algunas limitaciones. Una de las más comunes es la fragmentación del contexto: los documentos recuperados pueden contener información parcial o redundante, lo que dificulta su integración en un texto coherente. También existen desafíos relacionados con la selección de fuentes confiables, la actualización del conocimiento y el costo computacional de realizar búsqueda y generación en cada consulta.
+
+Con el fin de reducir estos problemas, surgieron estrategias complementarias conocidas como modelos reranker. Estos sistemas reordenan los resultados de la recuperación inicial, priorizando los fragmentos más relevantes antes de ser enviados al generador. De esta manera se mejora la precisión factual y se reduce el ruido en la información de entrada.
+
+Una evolución posterior es GraphRAG, que introduce los grafos de conocimiento como base de recuperación. En lugar de operar sobre texto plano, GraphRAG organiza la información en nodos y relaciones que representan entidades, conceptos o hechos. Este enfoque permite realizar consultas estructuradas y obtener respuestas que reflejan relaciones semánticas complejas. El proceso incluye la construcción del grafo a partir de fuentes documentales, su indexación en una base semántica y la recuperación contextual de los nodos pertinentes, los cuales se combinan con el modelo generador.
+
+El uso de grafos aporta ventajas importantes. Facilita la interpretación de los resultados, permite rastrear las fuentes de conocimiento utilizadas y posibilita un razonamiento de tipo multihop, en el que la información se obtiene a través de varios niveles de conexión entre entidades. Esta característica resulta especialmente útil en contextos donde los conceptos están interrelacionados de manera no lineal, como en los proyectos de investigación o los documentos metodológicos.
+
+Más recientemente, han aparecido aproximaciones denominadas Agentic RAG, en las que la generación aumentada se integra dentro de una arquitectura agéntica. En estos sistemas, distintos agentes especializados se encargan de tareas específicas: unos recuperan información, otros verifican coherencia y otros sintetizan los resultados finales. Este modelo distribuye la carga cognitiva entre agentes cooperantes y permite incorporar mecanismos de memoria y reflexión, en los que el sistema evalúa y mejora sus propias respuestas antes de emitir la versión final.
+
+En conjunto, las evoluciones de RAG muestran una transición desde la simple recuperación de texto hacia entornos más estructurados, conectados y autónomos. El paso por modelos reranker, GraphRAG y Agentic RAG refleja una tendencia hacia sistemas de generación que no solo producen lenguaje coherente, sino que también son capaces de razonar sobre el conocimiento, verificarlo y explicarlo de forma transparente.
+
+5.4	Mecanismos de evaluación de sistemas agénticos
+
+
+La evaluación de los sistemas agénticos basados en modelos de lenguaje ha evolucionado rápidamente, impulsada por la necesidad de medir no solo la calidad del resultado final, sino también la coherencia del razonamiento, la eficiencia en la planificación y la capacidad de adaptación en entornos dinámicos. Los enfoques recientes se organizan en cuatro grandes categorías que reflejan distintas dimensiones cognitivas: el razonamiento secuencial, el uso de herramientas y funciones, la autorreflexión, y la gestión de memoria.
+
+
+
+
+Evaluación de razonamiento y planificación multi-etapa
+
+La primera categoría se centra en medir la capacidad de los agentes para planificar, razonar en múltiples pasos y mantener la coherencia lógica en tareas complejas. Esta evaluación busca determinar si el sistema puede descomponer un problema en sub-tareas, realizar inferencias intermedias y alcanzar soluciones consistentes.
+
+ Los marcos de referencia más utilizados se basan en tareas de razonamiento matemático, causal o lógico, y en entornos interactivos donde se requiere coordinar acciones sucesivas. En este tipo de evaluación se analizan indicadores como la corrección del plan, la capacidad de recuperación ante errores, la consistencia entre estados y la coherencia global del razonamiento. El objetivo no es únicamente validar la respuesta final, sino también la calidad del proceso que conduce a ella. (Yehudai et al., n.d.)
+
+Evaluación del uso de herramientas y funciones externas
+
+Un segundo enfoque mide la competencia del agente para interactuar con herramientas, APIs o entornos de ejecución externos. Estas pruebas examinan la secuencia completa del proceso de function calling: desde el reconocimiento de intención y la selección de la herramienta adecuada, hasta la ejecución correcta y la integración de los resultados en la respuesta final. 
+
+Las métricas habituales incluyen precisión en la selección de la herramienta, eficiencia en los parámetros utilizados y tasa de éxito en la ejecución. Este tipo de evaluación es esencial en sistemas agénticos que combinan modelos de lenguaje con módulos de cálculo, bases de conocimiento o servicios externos, ya que permite identificar si el agente actúa de forma autónoma y eficiente al conectar razonamiento simbólico y operaciones reales.
+
+Evaluación de autorreflexión y mejora adaptativa
+
+La tercera categoría corresponde a la evaluación de la autorreflexión, entendida como la capacidad del agente para analizar y corregir sus propios errores durante o después de la ejecución de una tarea. Este tipo de evaluación busca medir si el sistema puede detectar inconsistencias, ajustar sus estrategias y aprender de la retroalimentación. 
+
+Los métodos más recientes, como los bancos de pruebas de reflexión cognitiva, descomponen el proceso en componentes como la actualización de creencias, la revisión de hipótesis, el razonamiento contrafactual y la metacognición. Estas pruebas resultan fundamentales en sistemas agénticos complejos, donde el éxito no depende solo de la ejecución, sino también de la capacidad del sistema para auto diagnosticarse y mejorar de forma continua sin supervisión humana directa.
+
+Evaluación de memoria y persistencia contextual
+
+Finalmente, los métodos centrados en la memoria analizan la habilidad del agente para retener, recuperar y utilizar información a lo largo del tiempo. La memoria se considera un componente esencial de la inteligencia agéntica, pues permite mantener coherencia entre interacciones, construir representaciones estables del entorno y vincular decisiones actuales con experiencias pasadas. 
+
+Los mecanismos de evaluación en esta categoría miden aspectos como la precisión de recuperación, la persistencia de la información en contextos prolongados, la actualización eficiente de estados y la integración entre memoria semántica y episódica. En contextos documentales o académicos, estas pruebas permiten determinar si un sistema agéntico mantiene la coherencia conceptual al procesar grandes volúmenes de información y si puede razonar de manera acumulativa a lo largo de sesiones.
+   
+
+Evaluación LLM-as-a-Judge
+
+El paradigma LLM-as-a-Judge utiliza un modelo de lenguaje de gran tamaño como evaluador de las salidas generadas por otros modelos o agentes. Este enfoque permite puntuar o clasificar respuestas según su coherencia, corrección factual o relevancia, simulando la valoración humana. (Yu, n.d.)
+
+Su principal ventaja es la escalabilidad, ya que posibilita evaluaciones masivas sin intervención manual. Sin embargo, un único juez puede introducir sesgos estilísticos o de preferencia hacia estructuras lingüísticas similares a las de su propio entrenamiento, lo que limita la imparcialidad de los resultados.
 \newpage
 \section{DISEÑO METODOLÓGICO}
 \vspace{-0.5cm}
-Esta sección hace referencia a la elaboración de una estrategia que permita obtener la información deseada y se enfoque en dar respuesta a la formulación del problema, de manera que se garantice la recolección, análisis y tratamiento de la información.
 
-Debe reflejar la estructura lógica del proceso de investigación, y la articulación entre los objetivos del estudio y los procedimientos metodológicos para cumplir dichos objetivos. Describir: ¿Cuáles son los instrumentos que utilizaran para recoger la información?, ¿Cómo organizarán y analizarán la información?
+La presente investigación se desarrolla bajo un enfoque mixto, con predominio cuantitativo y carácter aplicado, complementado por una validación cualitativa experta. El propósito central es diseñar, implementar y evaluar un sistema agéntico copiloto basado en grafos de conocimiento, orientado a fortalecer la coherencia semántica y la consistencia contextual en la generación asistida de documentos metodológicos de investigación.
 
-Se aconseja describir la metodología que se desarrollará por fases o etapas las cuales se encuentren directamente relacionadas con los objetivos específicos.
+Dado que los sistemas agénticos dependen de modelos de lenguaje con componentes inherentes de aleatoriedad y posibles fenómenos de alucinación, su evaluación representa un desafío metodológico. En este tipo de arquitecturas no resulta suficiente emplear métricas tradicionales del aprendizaje automático, como Precisión, Recall o F1-Score, ya que estas no capturan dimensiones como coherencia discursiva, consistencia estructural o calidad contextual. Además, la solución propuesta introduce un nivel mayor de abstracción, pues no solo se evalúa el desempeño individual de los agentes, sino también su orquestación, la gestión de memoria contextual y la capacidad de razonamiento multi-hop orientada a objetivos documentales específicos.
 
+En este sentido, el estudio se clasifica como experimental–aplicado, ya que integra el desarrollo tecnológico del sistema con una validación empírica controlada y un análisis cualitativo experto, garantizando coherencia entre formulación de hipótesis, diseño experimental, recolección de datos y análisis de resultados.
+
+\textbf{Hipótesis principal:}
+
+La integración de un sistema agéntico copiloto con un grafo de conocimiento mejora significativamente la coherencia y consistencia contextual en la generación asistida de documentos metodológicos.
+
+\vspace{0.3cm}
+
+En coherencia con esta hipótesis, se definen las siguientes variables:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{9cm}|}
+\hline
+\textbf{Tipo de variable} & \textbf{Descripción} \\ \hline
+Independiente & Implementación del sistema agéntico con soporte de grafo de conocimiento. \\ \hline
+Dependientes & Nivel de coherencia semántica, consistencia estructural y utilidad percibida. \\ \hline
+De control & Tipo de documento, nivel de complejidad conceptual y extensión del texto generado. \\ \hline
+\end{tabular}
+\end{table}
+
+El diseño adoptado es cuasi-experimental, con grupo único y mediciones pretest y postest. En la fase de pretest se evalúa la coherencia documental en textos generados sin asistencia del sistema. Posteriormente, en el postest, se analiza el mismo tipo de producción textual generada con apoyo del sistema agéntico. Esta comparación permite estimar el efecto de la variable independiente sobre las variables dependientes. De manera complementaria, se incorpora una validación cruzada mediante revisión experta.
+
+El esquema general del diseño puede resumirse de la siguiente manera:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{9cm}|}
+\hline
+\textbf{Componente} &\textbf{ Descripción} \\ \hline
+Pretest & Evaluación de coherencia en textos generados sin asistencia. \\ \hline
+Intervención & Implementación del sistema agéntico con grafo de conocimiento. \\ \hline
+Postest & Evaluación del mismo tipo de textos con asistencia del sistema. \\ \hline
+Validación adicional & Revisión experta para contraste cualitativo. \\ \hline
+\end{tabular}
+\end{table}
+
+La evaluación combina instrumentos automáticos y cualitativos, los cuales se sintetizan a continuación:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|p{4cm}|p{9cm}|}
+\hline
+\textbf{Tipo de instrumento} & \textbf{Aplicación} \\ \hline
+Métricas automáticas & Medición de coherencia semántica, completitud estructural y razonamiento multi-hop mediante esquemas tipo “LLM as Judge” en entorno MLOps. \\ \hline
+Evaluación experta & Escala Likert (1–5) para valorar coherencia, pertinencia y utilidad. \\ \hline
+Análisis estadístico & Análisis descriptivo y correlacional para identificar mejoras significativas entre pretest y postest. \\ \hline
+\end{tabular}
+\end{table}
+
+El desarrollo metodológico del proyecto se organiza en cinco fases progresivas e integradas. En una primera fase se realiza el análisis conceptual y documental, mediante revisión sistemática de estructuras metodológicas y modelos de coherencia narrativa, lo que permite identificar patrones semánticos y dependencias conceptuales. 
+
+En la segunda fase se aborda el modelado semántico y la construcción del grafo de conocimiento, formalizando la ontología mediante estándares como OWL y RDF, implementándola en una base de datos especializada y validando su consistencia estructural.
+
+Posteriormente se diseña la arquitectura agéntica, definiendo los módulos funcionales asociados a lectura, verificación, razonamiento, navegación y gestión de contexto, así como los mecanismos de interacción y orquestación con el grafo.
+
+En la cuarta fase se desarrolla el prototipo funcional e integra el sistema en un entorno controlado, realizando pruebas técnicas preliminares orientadas a verificar estabilidad y coherencia narrativa.
+
+Finalmente, se ejecuta la evaluación experimental híbrida, combinando métricas automáticas y validación experta para determinar el impacto del sistema en términos de coherencia, consistencia y utilidad percibida.
+
+En conjunto, este diseño metodológico mantiene coherencia entre objetivos, hipótesis, procedimientos y criterios de validación, permitiendo evaluar de manera sistemática la viabilidad técnica y el aporte funcional del sistema propuesto.
+
+
+\begin{sidewaystable}
 \subsection{Cronograma}
-\vspace{-0.5cm}
-Determine las actividades a desarrollar en el proyecto de acuerdo a la metodología definida para el logro de los objetivos y alcances del proyecto. (Precisar en: Procesos, fases y acciones, definiendo los tiempos probables de cada una de ellas. Se recomienda utilizar semanas como unidades de tiempo para la planeación.)
+\centering
+\renewcommand{\arraystretch}{1.2}
+\footnotesize
+\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|*{8}{c|}}
+\hline
+\rowcolor{gray!25}
+\textbf{Actividad} & \textbf{M1} & \textbf{M2} & \textbf{M3} & \textbf{M4} & \textbf{M5} & \textbf{M6} & \textbf{M7} & \textbf{M8} \\
+\hline
 
+% ---------------- FASE I ----------------
+\multicolumn{9}{|>{\columncolor{gray!15}}l|}{\textbf{Fase I – Análisis conceptual y documental}} \\
+\hline
+
+Revisión de estructuras documentales metodológicas y modelos de coherencia 
+& \cellcolor{blue!30} & & & & & & & \\
+
+Identificación de patrones semánticos y dependencias conceptuales 
+& \cellcolor{blue!30} & & & & & & & \\
+
+Construcción de la taxonomía base y ontología preliminar 
+& & \cellcolor{blue!30} & & & & & & \\
+\hline
+
+% ---------------- FASE II ----------------
+\multicolumn{9}{|>{\columncolor{gray!15}}l|}{\textbf{Fase II – Modelado semántico y grafo de conocimiento}} \\
+\hline
+
+Diseño del modelo ontológico (OWL/RDF) 
+& & \cellcolor{green!30} & & & & & & \\
+
+Implementación inicial del grafo en base de datos especializada 
+& & \cellcolor{green!30} & \cellcolor{green!30} & \cellcolor{green!30} & & & & \\
+
+Validación estructural y semántica del modelo 
+& & & \cellcolor{green!30} & \cellcolor{green!30} & & & & \\
+\hline
+
+% ---------------- FASE III ----------------
+\multicolumn{9}{|>{\columncolor{gray!15}}l|}{\textbf{Fase III – Arquitectura agéntica y módulos cognitivos}} \\
+\hline
+
+Diseño modular de agentes cognitivos (lectura, verificación, razonamiento)
+& & & & \cellcolor{orange!40} & & & & \\
+
+Definición de flujos de interacción entre agentes y grafo 
+& & & & \cellcolor{orange!40} & & & & \\
+
+Documentación técnica y diagramas UML 
+& & & \cellcolor{orange!40} & \cellcolor{orange!40} & \cellcolor{orange!40} & & & \\
+\hline
+
+% ---------------- FASE IV ----------------
+\multicolumn{9}{|>{\columncolor{gray!15}}l|}{\textbf{Fase IV – Implementación del prototipo funcional}} \\
+\hline
+
+Desarrollo del sistema agéntico copiloto 
+& & & & \cellcolor{purple!30} & \cellcolor{purple!30} & \cellcolor{purple!30} & \cellcolor{purple!30} & \cellcolor{purple!30} \\
+
+Integración con el grafo de conocimiento 
+& & & & & \cellcolor{purple!30} & \cellcolor{purple!30} & \cellcolor{purple!30} & \\
+\hline
+
+% ---------------- FASE V ----------------
+\multicolumn{9}{|>{\columncolor{gray!15}}l|}{\textbf{Fase V – Evaluación y validación experimental híbrida}} \\
+\hline
+
+Pruebas técnicas de coherencia y consistencia narrativa 
+& & & & & & & \cellcolor{red!30} & \cellcolor{red!30} \\
+
+Implementación y ejecución de pruebas multi-hop y validación contextual automática 
+& & & & & & \cellcolor{red!30} & \cellcolor{red!30} & \\
+
+Evaluación experta mediante encuestas y observación controlada 
+& & & & & & & & \cellcolor{red!30} \\
+
+Análisis comparativo de desempeño y utilidad 
+& & & & & & & & \cellcolor{red!30} \\
+
+Consolidación de resultados y redacción del informe final 
+& & \cellcolor{red!30} & \cellcolor{red!30} & \cellcolor{red!30} & \cellcolor{red!30} & \cellcolor{red!30} & \cellcolor{red!30} & \cellcolor{red!30} \\
+\hline
+
+\end{tabularx}
+
+
+\caption{Cronograma general del proyecto (8 meses)}
+\end{sidewaystable}
+\newpage
 \subsection{Resultados Esperados}
 \vspace{-0.5cm}
-Los resultados esperados de investigación en una tesis de maestría en profundización representan los productos concretos, logros o transformaciones que se anticipa alcanzar como consecuencia directa del desarrollo del proyecto. Estos resultados deben estar íntimamente vinculados con los objetivos formulados, tanto generales como específicos, y responder de forma coherente a la problemática y la pregunta de investigación planteadas.
 
-\begin{enumerate}
-    \item Relación con los objetivos: Para definir los resultados esperados, se parte de los objetivos específicos. Cada objetivo debe proyectar un resultado tangible o verificable. Por ejemplo, si uno de los objetivos es “Diseñar una herramienta basada en inteligencia artificial para optimizar la atención al cliente en una entidad financiera”, un resultado esperado coherente sería: “Una herramienta funcional validada en un entorno controlado que demuestre mejoras en tiempos de respuesta y satisfacción del cliente”.
-\item Características de los resultados esperados. Los resultados deben ser:
-\begin{itemize}
-    \item Concretos y verificables: deben poder demostrarse mediante evidencias (datos, informes, prototipos, análisis comparativos, entre otros).
-    \item Relevantes y pertinentes: deben tener un impacto claro sobre el contexto del problema abordado.
-    \item Alineados con la modalidad de profundización: en esta modalidad, los resultados se orientan principalmente a la solución de problemas reales, el desarrollo de productos, servicios o procesos innovadores, o la aplicación de conocimientos especializados en contextos específicos. Al ser proyectos de nivel de maestría, también se esperan resultados relacionados con producción intelectual como artículos en revista y/o conferencias.
-\end{itemize}
-\item Tipos de resultados esperados. Dependiendo del enfoque del proyecto, los resultados pueden incluir:
-\begin{itemize}
-    \item Prototipos funcionales o sistemas implementados.
-    \item Modelos o metodologías aplicadas a un caso específico.
-    \item Manuales, guías o recomendaciones basadas en evidencia.
-    \item Mejoras medibles en procesos o indicadores clave.
-    \item Informes de validación, pruebas de usabilidad o análisis de impacto.
-\end{itemize}
+El desarrollo metodológico propuesto permitirá obtener una serie de resultados progresivos y verificables que se corresponden directamente con los objetivos específicos definidos y las fases metodológicas planteadas. Cada fase aporta productos concretos que, en conjunto, evidencian el logro del objetivo general de diseñar y evaluar un sistema agéntico copiloto basado en grafos de conocimiento.
 
-Los resultados esperados actúan como una guía que orienta el trabajo práctico de la tesis, facilitando la toma de decisiones metodológicas y la evaluación del impacto del proyecto. Además, permiten a los evaluadores comprender la contribución concreta del trabajo en términos de innovación, aplicabilidad y resolución de problemas.
-\end{enumerate}
+\textbf{Fase I. Análisis conceptual y documental:}
+
+Como resultado de esta etapa se espera disponer de un mapa conceptual y semántico que describa las estructuras, dependencias y relaciones entre los componentes de los documentos de investigación. Este producto se materializará en una taxonomía de coherencia documental que servirá como insumo para el modelado del grafo de conocimiento. Adicionalmente, se generará un mapa conceptual con las metodologías más representativas de redacción metodológica y sus vínculos semánticos.
+
+\textbf{Fase II.  Modelado semántico y diseño del grafo de conocimiento:}
+
+El resultado central de esta fase será un modelo semántico-ontológico formalizado que represente las relaciones conceptuales identificadas en la fase anterior. Este modelo se implementará como un grafo de conocimiento funcional, construido en un una base de datos de grafos (por ejemplo, Neo4j o RDF/OWL), validado mediante consultas Cypher y revisión semántica. El grafo actuará como memoria contextual estructurada, permitiendo la representación explícita del conocimiento y las dependencias entre secciones de los documentos metodológicos. 
+
+\textbf{Fase III. Diseño de la arquitectura agéntica:}
+
+En esta fase se espera obtener una arquitectura agéntica cognitiva, compuesta por módulos especializados de lectura, análisis, verificación y navegación documental, capaces de interactuar con el grafo de conocimiento. El resultado tangible será un modelo arquitectónico documentado, expresado mediante diagramas UML y un BPMN adaptado, que detalle los procesos de comunicación entre agentes y su rol dentro del ecosistema de co-creación documental.
+\newpage
+\textbf{Fase IV. Implementación del prototipo funcional:}
+
+El resultado esperado será un prototipo operativo del sistema agéntico copiloto, que integre los módulos cognitivos y el grafo de conocimiento en un entorno de experimentación controlado. Este prototipo demostrará la capacidad del sistema para generar, actualizar y verificar contenido contextual dentro de proyectos de investigación. Su desarrollo se acompañará de documentación técnica, guías de instalación y evidencias de funcionamiento (capturas, logs, datasets de prueba y reportes de desempeño).
+
+\textbf{Fase V. Evaluación y validación híbrida:}
+
+Finalmente, se espera obtener un informe de evaluación integral que combine resultados cuantitativos y cualitativos. En el componente experimental se generarán métricas objetivas sobre coherencia semántica, consistencia narrativa y razonamiento multi-hop, mientras que en el componente cualitativo se recogerán percepciones expertas sobre utilidad, pertinencia y aplicabilidad del sistema en la co-creación de documentos. 
+Cabe aclarar que debido a la naturaleza generativa de los modelos base, se espera una implementación siguiendo practicas recientes de MLOPS o AgentOps, mediante un proceso iterativo con énfasis en encontrar la evaluación mínima enfocada en el propósito de este proyecto. Es decir, no se pretende llegar a un nivel de evaluación de entorno de producción, puesto que es un prototipo.
+Los resultados permitirán identificar fortalezas, limitaciones y oportunidades de mejora del prototipo, consolidando su validez metodológica y su contribución práctica al campo de la inteligencia artificial aplicada a la documentación científica.
+
 
 \newpage
 \section{RECURSOS Y ASPECTOS ECONÓMICOS}
 \vspace{-0.5cm}
-\begin{tabularx}{\textwidth}{|p{0.25\textwidth}|X|}
+\begin{table}[H]
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.15}
+
+\begin{tabularx}{\textwidth}{|p{2.8cm}|X|c|c|c|c|r|}
 \hline
-{\textbf{TIPO DE RECURSO}} & \textbf{DESCRIPCIÓN} \\
+\rowcolor{azulUAO}
+\color{white}\textbf{Concepto} &
+\color{white}\textbf{Descripción} &
+\multicolumn{4}{c|}{\color{white}\textbf{Tipo de financiación}} &
+\color{white}\textbf{Costo Total} \\ \cline{3-6}
+
+\rowcolor{azulUAO}
+ & &
+\color{white}\textbf{UAO Ef.} &
+\color{white}\textbf{UAO Esp.} &
+\color{white}\textbf{Propia Ef.} &
+\color{white}\textbf{Propia Esp.} &
+\\
 \hline
-Capital Humano & Describir el personal involucrado en el proyecto, Director de Proyecto, trabajadores de la empresa o del objeto estudio.\\
+
+1. Personal & Director del proyecto (5 h/semana) &  & 32.000.000 &  &  & 32.000.000 \\
+ & Investigador (15 h/semana) &  &  &  & 48.000.000 & 48.000.000 \\
 \hline
-Tecnologías Blandas & Describir los recursos o elementos intangibles, por ejemplo software especializado, metodologías, herramientas, entre otros. \\
+
+2. Recursos Tecnológicos & Servicios de nube (Azure) &  &  &  & 960.000 & 960.000 \\
+ & Servicios modelos lenguaje (IA/Tokens) &  &  &  & 500.000 & 500.000 \\
+ & Licenciamientos (Neo4J) &  &  &  & 1.560.000 & 1.560.000 \\
+ & Office 365 &  & 400.000 &  &  & 400.000 \\
+ & Documentación digital (papers, libros) &  &  &  & 300.000 & 300.000 \\
 \hline
-Tecnologías Duras & Describir los recursos o elementos tangibles por ejemplo computadores, GPS, cámaras fotográficas, entre otros. \\
+
+3. Equipos & Sistema almacenamiento y cómputo &  &  &  & 2.000.000 & 2.000.000 \\
+ & Servicios de impresión (encuestas) &  &  &  & 250.000 & 250.000 \\
 \hline
-Infraestructura & Describir las locaciones que se utilizarán para el desarrollo del proyecto, por ejemplo laboratorios, empresas, entre otros. \\
+
+4. Materiales & Gastos de papelería &  &  &  & 100.000 & 100.000 \\
 \hline
-Financieros & Describir si la financiación es propia, a través de la UAO o externa, describir para que se utilizarán los recursos, por ejemplo visitas al objeto estudio. \\
+
+5. Imprevistos & Generales (1\%) &  &  &  & 860.700 & 860.700 \\
 \hline
+
+\rowcolor{azulUAO2}
+\multicolumn{6}{|r|}{\textbf{COSTO TOTAL}} & \textbf{86.930.700} \\
+\hline
+
 \end{tabularx}
 
-Se sugiere indicar claramente la fuente de financiación. Las fuentes podrán ser entre otras:
-\begin{enumerate}
-    \item Financiación propia: Esto implica que los costos del proyecto serán cubiertos por los proponentes.
-    \item Financiación UAO: esto implica que los costos del proyecto serán cubiertos por la Universidad Autónoma de Occidente.
-    \item Financiación Externa: esto implica que los costos del proyecto de grado serán cubiertos por una entidad externa.
-\end{enumerate}
+\caption{Recursos y aspectos económicos del proyecto}
+\end{table}
+Los recursos propuestos para esta investigación, corresponden mayoritariamente a gastos de nube, debido a la necesidad de usar recursos como modelos de lenguaje, despliegue de recursos de software en nube.
+Por otro lado, se incluyen las horas de acompañamiento del Director del proyecto con una dedicación de 5 horas semanales, por su apoyo metodológico que obedecen un tipo de proyecto de modalidad de profundización.
 
-
+Para las últimas actividades de evaluación cualitativa, se contempla la aplicación de encuestas y participación de otros docentes y expertos en el área académica, que corresponde a la justificación de los demás materiales relacionados en la tabla.
 \newpage
 \renewcommand{\refname}{REFERENCIAS}
 \addcontentsline{toc}{section}{REFERENCIAS}
