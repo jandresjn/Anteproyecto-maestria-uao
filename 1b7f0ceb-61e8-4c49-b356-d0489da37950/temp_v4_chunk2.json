@@ -1,0 +1,294 @@
+{
+    "source": "Plantilla.tex",
+    "chunk": "251-500",
+    "nodes": [
+        {
+            "id": "INT_1",
+            "type": "Contexto",
+            "label": "Evolución intuición al método científico",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_2",
+            "type": "Contexto",
+            "label": "Alineación problema-estrategia (Miles 2019)",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_3",
+            "type": "Problema",
+            "label": "Redacción estructurada produce fatiga manual (Covvey 2023)",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_4",
+            "type": "Paradoja_LLM",
+            "label": "LLM: Excelentes redactores, deficientes metodólogos",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_5",
+            "type": "Problema",
+            "label": "Amnesia Contextual causante de fisuras (Huang 2025)",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_6",
+            "type": "Contexto",
+            "label": "Exigencia Revistas Q1/Q2 penalizan falla metodológica",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_7",
+            "type": "Tecnologia",
+            "label": "Ingeniería de Contexto controla lógica (Zhuang 2025)",
+            "section": "Introducción"
+        },
+        {
+            "id": "INT_8",
+            "type": "Solucion",
+            "label": "Agentes + KG + SLM como garante metodológico (Ibrahim 2024)",
+            "section": "Introducción"
+        },
+        {
+            "id": "PRO_1",
+            "type": "Problema",
+            "label": "Alto esfuerzo cognitivo para justificar citas múltiples (Miles 2019)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_2",
+            "type": "Limitacion_IA",
+            "label": "IA generativa opera en plano lingüístico, no jerárquico-causal (Zhuang 2025)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_3",
+            "type": "Limitacion_IA",
+            "label": "Modificación sutil arruina la estructura general",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_4",
+            "type": "Limitacion_RAG",
+            "label": "RAG clásico solo ataca factualidad, no consistencia lógica (Singh 2025)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_5",
+            "type": "Concepto",
+            "label": "KG como Ground Truth dinámico / trazabilidad (Mohamed 2025)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_6",
+            "type": "Avance",
+            "label": "Inferencia de relaciones en oraciones dispersas (Nan 2020)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_7",
+            "type": "Avance",
+            "label": "Redes de grafos heterogéneos y atención (Li 2022)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_8",
+            "type": "Tecnologia",
+            "label": "Agentes especializados: Verify-Agent (Chu 2024)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_9",
+            "type": "Tecnologia",
+            "label": "MMA-RAG: Datos estructurados y no estructurados (Krayem 2025)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_10",
+            "type": "Optimizacion",
+            "label": "SLM optimizado para Text-to-Graph de bajo costo y latencia",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_11",
+            "type": "Vacio_Cientifico",
+            "label": "Inexistencia de arquitectura de Ing Contexto (KG+SLM) para Verificación Estructural Automatizada",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_12",
+            "type": "Concepto",
+            "label": "Autonomía de planificación y razonamiento múltiple (Khamis 2025)",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "PRO_13",
+            "type": "Pregunta_Inv",
+            "label": "RQ: ¿Cómo KG+SLM reduce inconsistencias lógicas en proyectos?",
+            "section": "Planteamiento_Problema"
+        },
+        {
+            "id": "OBJ_1",
+            "type": "Objetivo",
+            "label": "OG: Desarrollar COPILOTO AGÉNTICO (KG+SLM)",
+            "section": "Objetivos"
+        },
+        {
+            "id": "OBJ_2",
+            "type": "Objetivo",
+            "label": "OE1: Analizar Estructuras y Criterios",
+            "section": "Objetivos"
+        },
+        {
+            "id": "OBJ_3",
+            "type": "Objetivo",
+            "label": "OE2: Diseñar Modelo Semántico/Ontológico",
+            "section": "Objetivos"
+        },
+        {
+            "id": "OBJ_4",
+            "type": "Objetivo",
+            "label": "OE3: Implementar Copiloto SLM + KG",
+            "section": "Objetivos"
+        },
+        {
+            "id": "OBJ_5",
+            "type": "Objetivo",
+            "label": "OE4: Validar en Entorno Controlado",
+            "section": "Objetivos"
+        },
+        {
+            "id": "JUS_1",
+            "type": "Justificacion",
+            "label": "Coherencia exige Representación Estable",
+            "section": "Justificacion_y_Alcance"
+        },
+        {
+            "id": "JUS_2",
+            "type": "Justificacion",
+            "label": "Sistemas LLM texto plano no preservan estado estructurado",
+            "section": "Justificacion_y_Alcance"
+        },
+        {
+            "id": "JUS_3",
+            "type": "Solucion",
+            "label": "KG+SLM proveen Entendimiento 'Grounded'",
+            "section": "Justificacion_y_Alcance"
+        },
+        {
+            "id": "JUS_4",
+            "type": "Concepto",
+            "label": "Distribución de Tareas Cognitivas Agenciales (Bonifazi 2025)",
+            "section": "Justificacion_y_Alcance"
+        },
+        {
+            "id": "JUS_5",
+            "type": "Alcance",
+            "label": "Entorno acotado: evaluar y contrastar con RAG externo, no suplir humano",
+            "section": "Justificacion_y_Alcance"
+        },
+        {
+            "id": "ANT_1",
+            "type": "Backbone",
+            "label": "Transformers: Atención y contextos paralelos (Vaswani 2017)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_2",
+            "type": "Backbone",
+            "label": "Comportamiento Emergente en LLMs (Long 2022)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_3",
+            "type": "Concepto",
+            "label": "AI Agents usan LLM para toma de decisiones (Acharya 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_4",
+            "type": "Concepto",
+            "label": "Agentic AI Systems: División colaborativa del trabajo",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_5",
+            "type": "Concepto",
+            "label": "Memoria agéntica: Semántica, Episódica, Procedimental (Khamis 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_6",
+            "type": "Concepto",
+            "label": "Handoff y Cueing para transferencia de contexto (Khamis 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_7",
+            "type": "Evaluacion",
+            "label": "Autorreflexión e internamiento de errores (Bandi 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_8",
+            "type": "RAG",
+            "label": "RAG reduce alucinación pero fragmenta contexto (Lewis 2021, Xi 2023, Singh 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_9",
+            "type": "RAG",
+            "label": "Rerankers priorizan información semántica (Li 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_10",
+            "type": "GraphRAG",
+            "label": "GraphRAG para razonamiento multi-hop en entidades jerárquicas (Edge 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_11",
+            "type": "AgenticRAG",
+            "label": "Agentic RAG: Agentes separan recuperación, verificación y síntesis (Colombo 2024)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_12",
+            "type": "Razonamiento",
+            "label": "SMORE: Multihop de alta escalabilidad vectorial (Ren 2022)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_13",
+            "type": "KG",
+            "label": "Tripletas semánticas (Sardina 2024)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_14",
+            "type": "KG",
+            "label": "KG Embeddings y topología de densidad (Rossi/Bonner)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_15",
+            "type": "KG",
+            "label": "Grafo informático escalable multihop (Dess 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_16",
+            "type": "Copiloto",
+            "label": "Docpilot: Modelo generativo orquestando edición de documentos autodebugging (Mathur 2024)",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "ANT_17",
+            "type": "Evaluacion",
+            "label": "Eval de Agentes: Function calling y Multihop planning (Asaf 2025)",
+            "section": "Antecedentes_y_EstadoArte"
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+{
+    "source": "Plantilla.tex",
+    "chunk": "751-874",
+    "nodes": [
+        {
+            "id": "COS_5",
+            "type": "Presupuesto",
+            "label": "Prioridad Gasto: Infraestructura de nube y LLMs",
+            "section": "Recursos_y_Presupuesto"
+        },
+        {
+            "id": "COS_6",
+            "type": "Presupuesto",
+            "label": "Presupuesto Total: 86.9 Millones COP",
+            "section": "Recursos_y_Presupuesto"
+        },
+        {
+            "id": "COS_7",
+            "type": "Presupuesto",
+            "label": "Director de Proyecto (5h semanales)",
+            "section": "Recursos_y_Presupuesto"
+        },
+        {
+            "id": "COS_8",
+            "type": "Presupuesto",
+            "label": "Costos de evaluación: Panel cuantitativo de expertos (Likert)",
+            "section": "Recursos_y_Presupuesto"
+        },
+        {
+            "id": "BIB_1",
+            "type": "Pipeline_Bibliografia",
+            "label": "Pipeline de Referencias con natbib (.bib)",
+            "section": "Referencias_y_Anexos"
+        },
+        {
+            "id": "BIB_2",
+            "type": "Requisito_Marco",
+            "label": "Prioridad Artículos Q1/Q2 Inglés",
+            "section": "Referencias_y_Anexos"
+        }
+    ]
+}

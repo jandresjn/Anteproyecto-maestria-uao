@@ -1,0 +1,32 @@
+# Estrategia Agéntica para la Verificación de Arquitectura Lógica
+
+El objetivo es modelar la estructura lógica del proyecto de maestría en un diagrama de flujo de Mermaid, con el fin de tener una herramienta visual que facilite el análisis de coherencia estructural e identifique posibles "huecos" lógicos entre las distintas secciones del anteproyecto.
+
+## Proposed Changes
+
+### Creación del Archivo de Arquitectura
+Creación de un nuevo archivo `arquitectura-lógica.md` en el directorio principal del proyecto (`c:\Users\jandr\OneDrive\Documentos\dev\Anteproyecto-maestria-uao\`).
+
+Este documento estará dividido en dos partes fundamentales:
+1. **Mapa Conceptual/Grafo Lógico (Mermaid):** Diagrama que relaciona el Título, Problema, Objetivos, Metodología, Tecnologías (KGs, SLMs) y Alcance.
+2. **Análisis Crítico de Coherencia:** Un reporte estructurado evaluando si los nodos del grafo concuerdan entre sí (ej. validando si cada objetivo tiene una fase metodológica, o si la tecnología propuesta atiende la problemática planteada).
+
+## Plan de Ejecución (Paso a Paso)
+
+1. **Extracción y Mapeo Semántico:**
+   - Realizar lecturas granulares automatizadas de `contexto_proyecto.md`.
+   - Extraer textualmente de `Plantilla.tex` los componentes exactos (Título, Problema central, Pregunta de investigación, Objetivos específicos 1 a 4, Fases metodológicas 1 a 5, y el Scope/Alcance).
+2. **Diseño de la Topología Mermaid:**
+   - Estructurar un `flowchart TD` (Top-Down).
+   - Crear subgrafos temáticos: **Capa Fundamental** (Problema/Justificación), **Capa Teleológica** (Objetivos), **Capa Metodológica** (Fases y Resultados), y **Capa Tecnológica** (SLM, Grafos de Conocimiento, Agentes).
+   - Establecer conexiones lógicas e inyectar clases de estilo para diferenciar componentes visualmente.
+3. **Auditoría de Coherencia Lógica (Auto-reflejo):**
+   - Evaluar las conexiones creadas.
+   - Detectar "nodos huérfanos" (elementos mencionados sin conexión a resultados u objetivos).
+   - Evaluar la alineación "Título vs Objetivo General" y "Problema vs Metodología".
+4. **Redacción del Recurso:**
+   - Compilar el diagrama y el análisis en el archivo `arquitectura-lógica.md`.
+
+## User Review Required
+> [!IMPORTANT]
+> Por favor, revisa esta estrategia de ejecución. Si estás de acuerdo con el enfoque propuesto (mapeo semántico $\rightarrow$ grafo mermaid $\rightarrow$ auditoría de coherencia), confírmame para proceder con la lectura de los documentos y la creación de `arquitectura-lógica.md`.

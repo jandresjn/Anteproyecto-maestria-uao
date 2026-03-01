@@ -1,0 +1,103 @@
+{
+  "project_metadata": {
+    "title": "Desarrollo de un sistema agentico basado en grafos de conocimiento y modelos de lenguaje pequeños para la verificación estructural automatizada de propuestas de investigación",
+    "budget_total": "86.930.700",
+    "duration_months": 8
+  },
+  "nodes": [
+    { "id": "CTX_1", "group": "Contexto", "label": "Evolución Método Científico" },
+    { "id": "CTX_2", "group": "Contexto", "label": "Alineación Problema-Metodología" },
+    { "id": "CTX_3", "group": "Contexto", "label": "Exigencias Revistas Q1/Q2" },
+    { "id": "CTX_4", "group": "Contexto", "label": "Penalización Inconsistencias (Convocatorias)" },
+    
+    { "id": "AUT_1", "group": "Autores", "label": "Miles (2019): Justificación P-S" },
+    { "id": "AUT_2", "group": "Autores", "label": "Covvey (2023): Alineación Lógica" },
+    { "id": "AUT_3", "group": "Autores", "label": "Huang (2025): Amnesia Contextual" },
+    { "id": "AUT_4", "group": "Autores", "label": "Zhuang (2025): Ing. Contexto" },
+    { "id": "AUT_5", "group": "Autores", "label": "Mohamed (2025): KG Ground Truth" },
+    { "id": "AUT_6", "group": "Autores", "label": "Nan (2020)/Li (2022): Relaciones Inter-oración" },
+    { "id": "AUT_7", "group": "Autores", "label": "Chu (2024)/Krayem (2025): Verify-Agent / MMA-RAG" },
+    { "id": "AUT_8", "group": "Autores", "label": "Vaswani/Long/Acharya: Transformers & Agentes" },
+    { "id": "AUT_9", "group": "Autores", "label": "Asaf (2025): Eval Agéntica" },
+    { "id": "AUT_10", "group": "Autores", "label": "Lewis/Xi/Edge: RAG, Alucinaciones, GraphRAG" },
+    { "id": "AUT_11", "group": "Autores", "label": "Ren (2022): SMORE Multihop" },
+    { "id": "AUT_12", "group": "Autores", "label": "Mathur (2024): Docpilot" },
+
+    { "id": "PROB_1", "group": "Problema_Humano", "label": "Escritura Fragmentada y Fatiga" },
+    { "id": "PROB_2", "group": "Problema_Humano", "label": "Pérdida de Trazabilidad Manual" },
+    { "id": "PROB_3", "group": "Problema_LLM", "label": "Paradoja: Gran redactor, pésimo metodólogo" },
+    { "id": "PROB_4", "group": "Problema_LLM", "label": "Predicción Estadística sin Causalidad" },
+    { "id": "PROB_5", "group": "Problema_LLM", "label": "Amnesia Contextual / Estructural a Largo Plazo" },
+    { "id": "PROB_6", "group": "Problema_RAG", "label": "Factualidad vs Consistencia Lógica" },
+    { "id": "PROB_7", "group": "Problema_RAG", "label": "Desfragmentación del Contexto RAG Clásico" },
+    { "id": "PROB_8", "group": "Problema_Eval", "label": "Sesgos en LLM-as-a-judge" },
+    { "id": "PROB_GAP", "group": "Vacío", "label": "Falta de Arquitectura Agéntica + KG para Verificación Aut." },
+
+    { "id": "TEC_KG1", "group": "Tecnologia_KG", "label": "Memoria Estructural Explícita" },
+    { "id": "TEC_KG2", "group": "Tecnologia_KG", "label": "Tripletas (Sujeto-Predicado-Objeto)" },
+    { "id": "TEC_KG3", "group": "Tecnologia_KG", "label": "Ontologías (Jerarquías/Reglas OWL/RDF)" },
+    { "id": "TEC_KG4", "group": "Tecnologia_KG", "label": "KG Embeddings (Proyección Vectorial)" },
+    { "id": "TEC_KG5", "group": "Tecnologia_KG", "label": "Razonamiento Multihop Bidireccional" },
+
+    { "id": "TEC_AG1", "group": "Tecnologia_Agentes", "label": "Agentic AI Systems" },
+    { "id": "TEC_AG2", "group": "Tecnologia_Agentes", "label": "Módulo Cognitivo: Memoria Semántica/Episódica" },
+    { "id": "TEC_AG3", "group": "Tecnologia_Agentes", "label": "Mecanismos de Orquestación (Handoff/Cueing)" },
+    { "id": "TEC_AG4", "group": "Tecnologia_Agentes", "label": "Uso de Herramientas (APIs/Bases)" },
+    { "id": "TEC_AG5", "group": "Tecnologia_Agentes", "label": "Metacognición y Autorreflexión" },
+
+    { "id": "TEC_SLM1", "group": "Tecnologia_SLM", "label": "Modelos Ligeros Optimizados" },
+    { "id": "TEC_SLM2", "group": "Tecnologia_SLM", "label": "Extración Text-to-Graph Alta Eficiencia" },
+
+    { "id": "TEC_RAG1", "group": "Tecnologia_RAG", "label": "RAG Denso (BM25 + Semantic)" },
+    { "id": "TEC_RAG2", "group": "Tecnologia_RAG", "label": "Rerankers Módulo" },
+    { "id": "TEC_RAG3", "group": "Tecnologia_RAG", "label": "GraphRAG (Índice Semántico Estructurado)" },
+
+    { "id": "TEL_1", "group": "Teleologico", "label": "RQ: ¿Cómo Ing Contexto KG+SLM reduce inconsistencias?" },
+    { "id": "TEL_2", "group": "Teleologico", "label": "OG: Desarrollar Copiloto Agéntico Evaluador" },
+    { "id": "TEL_3", "group": "Teleologico", "label": "OE1: Analizar Estructuras" },
+    { "id": "TEL_4", "group": "Teleologico", "label": "OE2: Diseñar KG Semántico" },
+    { "id": "TEL_5", "group": "Teleologico", "label": "OE3: Implementar Copiloto (SLM+KG)" },
+    { "id": "TEL_6", "group": "Teleologico", "label": "OE4: Validar Híbridamente" },
+    { "id": "TEL_HIP", "group": "Teleologico", "label": "Hipótesis: Mejora sig. Coherencia Documental" },
+
+    { "id": "MET_1", "group": "Metodo_Diseno", "label": "Enfoque Mixto / Aplicado-Experimental" },
+    { "id": "MET_2", "group": "Metodo_Diseno", "label": "Diseño Cuasi-Experimental (Pre/Post Test)" },
+    { "id": "MET_3", "group": "Metodo_Var", "label": "Var IND: Sist. Agéntico + KG" },
+    { "id": "MET_4", "group": "Metodo_Var", "label": "Var DEP: Coherencia y Consistencia" },
+    { "id": "MET_5", "group": "Metodo_Var", "label": "Var CTRL: Acotar Complejidad Proyecto" },
+
+    { "id": "FAS_1a", "group": "Fase_1", "label": "Revisión Modelos Narrativos" },
+    { "id": "FAS_1b", "group": "Fase_1", "label": "Identificar Dependencias Conceptuales" },
+    { "id": "FAS_1c", "group": "Fase_1", "label": "Taxonomía Base" },
+    { "id": "FAS_1d", "group": "Fase_1", "label": "Ontología Preliminar" },
+
+    { "id": "FAS_2a", "group": "Fase_2", "label": "Formalizar OWL/RDF" },
+    { "id": "FAS_2b", "group": "Fase_2", "label": "Instanciar Grafo (Neo4j)" },
+    { "id": "FAS_2c", "group": "Fase_2", "label": "Validación Cypher" },
+
+    { "id": "FAS_3a", "group": "Fase_3", "label": "Diseño Agente Lectura" },
+    { "id": "FAS_3b", "group": "Fase_3", "label": "Diseño Agente Verificación" },
+    { "id": "FAS_3c", "group": "Fase_3", "label": "Navegación Intragrafo" },
+    { "id": "FAS_3d", "group": "Fase_3", "label": "Arquitectura UML/BPMN" },
+
+    { "id": "FAS_4a", "group": "Fase_4", "label": "Integración SLM a KG" },
+    { "id": "FAS_4b", "group": "Fase_4", "label": "Mecanismo Carga / Validación de Nodos" },
+    { "id": "FAS_4c", "group": "Fase_4", "label": "Entorno MLOps Experimental" },
+
+    { "id": "FAS_5a", "group": "Fase_5", "label": "Eval 1: Completitud (Multi-Hop Auto)" },
+    { "id": "FAS_5b", "group": "Fase_5", "label": "Eval 2: Uso de Herramientas Agente" },
+    { "id": "FAS_5c", "group": "Fase_5", "label": "Eval 3: Panel Likert Experto" },
+    { "id": "FAS_5d", "group": "Fase_5", "label": "Análisis Correlacional" },
+
+    { "id": "OUT_1", "group": "Entregables", "label": "Entregable 1: Taxonomía Doc" },
+    { "id": "OUT_2", "group": "Entregables", "label": "Entregable 2: Neo4j Activo" },
+    { "id": "OUT_3", "group": "Entregables", "label": "Entregable 3: Planos BPMN" },
+    { "id": "OUT_4", "group": "Entregables", "label": "Entregable 4: Código Copiloto" },
+    { "id": "OUT_5", "group": "Entregables", "label": "Entregable 5: Data Reporte" },
+
+    { "id": "PRE_1", "group": "Costos", "label": "RH: $80 Millones" },
+    { "id": "PRE_2", "group": "Costos", "label": "Cloud (Azure): $960k" },
+    { "id": "PRE_3", "group": "Costos", "label": "Tokens MLOps: $500k" },
+    { "id": "PRE_4", "group": "Costos", "label": "Soporte (Licencias/Eq): ~$4.5M" }
+  ]
+}

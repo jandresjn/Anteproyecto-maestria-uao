@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary":  "Updated the implementation plan for V4: Map-reduce strategy reading exactly 250 lines per chunk to extract >150 nodes, categorizing them strictly by document sections.",
+  "updatedAt":  "2026-02-22T07:55:44.326916600Z",
+  "version":  "3"
+}

@@ -1,0 +1,136 @@
+# Arquitectura Lógica del Anteproyecto (Versión 2: Granular)
+
+Este documento representa la versión enriquecida (V2) de la arquitectura lógica de tu anteproyecto. Fue generada tras una lectura **granular e iterativa (lectura en bloques de 250 líneas)** de `Plantilla.tex`, extrayendo detalles más profundos sobre la teoría (Text-to-graph, AgentOps, sesgos de LLM-as-a-judge) y la metodología (variables de control, ontología preliminar de la fase 1).
+
+---
+
+## 1. Topología Lógica Enriquecida (Grafo Mermaid V2)
+
+Este diagrama mejora el anterior al incorporar los "Zettels de Alta Resolución" capturados en las secciones del Marco Teórico y Diseño Metodológico.
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#ffffff', 'edgeLabelBackground':'#f4f4f4', 'tertiaryColor': '#f4f4f4', 'fontFamily': 'Inter, sans-serif'}}}%%
+flowchart TD
+    %%------------------------------------%%
+    %% DEFINICIÓN DE CLASES Y ESTILOS     %%
+    %%------------------------------------%%
+    classDef fin fill:#e0f2fe,stroke:#0284c7,stroke-width:2px,color:#0c4a6e;
+    classDef problema fill:#fee2e2,stroke:#dc2626,stroke-width:2px,color:#7f1d1d;
+    classDef objetivo fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#14532d;
+    classDef metodo fill:#fef9c3,stroke:#ca8a04,stroke-width:2px,color:#713f12;
+    classDef tecnologia fill:#f3e8ff,stroke:#9333ea,stroke-width:2px,color:#581c87,stroke-dasharray: 5 5;
+    classDef output fill:#f1f5f9,stroke:#64748b,stroke-width:1px,color:#0f172a;
+    classDef zettel fill:#ffffff,stroke:#94a3b8,stroke-width:1px,stroke-dasharray: 3 3;
+
+    %%------------------------------------%%
+    %% CAPA 1: FIN Y PROPÓSITO GENERAL     %%
+    %%------------------------------------%%
+    subgraph CapaTeleologica ["1. FIN / PROPÓSITO (Marco Lógico)"]
+        direccion(TB)
+        Q[Pregunta: ¿Cómo la Ing. de Contexto reduce inconsistencias lógicas?]:::fin
+        OG[Objetivo General: Prototipo Copiloto Agéntico (KG+SLM)]:::fin
+        Q --> OG
+    end
+
+    %%------------------------------------%%
+    %% CAPA 2: SITUACIÓN PROBLEMA          %%
+    %%------------------------------------%%
+    subgraph CapaProblema ["2. PROBLEMA Y JUSTIFICACIÓN GRÁNULAR"]
+        direccion(TB)
+        P1[Fisuras metodológicas en docs extensos]:::problema
+        P2[Amnesia Contextual y RAG insuficiente]:::problema
+        P3[Sesgo estilístico en \nLLM-as-a-Judge]:::problema
+        OG -. "Resuelve" .-> P1
+        P2 --- Z1(((ZETTEL: \nRAG da factualidad, \nno consistencia lógica.))):::zettel
+        P3 --- Z2(((ZETTEL: \nEvaluar con 1 LLM \nsesga el resultado.))):::zettel
+    end
+
+    %%------------------------------------%%
+    %% CAPA 3: TECNOLOGÍA ENVOLVENTE       %%
+    %%------------------------------------%%
+    subgraph CapaTecnologica ["3. CAPA TECNOLÓGICA (Variables Independientes)"]
+        KG[Grafos Conocimiento \n(Memoria Estructurada explícita)]:::tecnologia
+        SLM[SLMs: Extractores \nText-to-Graph]:::tecnologia
+        AGENTES[Sistema Agéntico: Módulos \nde Lectura y Verificación]:::tecnologia
+        
+        KG --- Z3(((ZETTEL: \nPermiten inferencia \nMultihop eficiente.))):::zettel
+        SLM --- Z4(((ZETTEL: \nBajo costo para poblar \nel grafo iterativamente.))):::zettel
+        AGENTES --- Z5(((ZETTEL: \nAgentOps ligero, coordinación \nsin reemplazar humano.))):::zettel
+
+        %% Vínculos tecnológicos transversales a capas
+        KG -. "Soluciona" .-> P2
+        KG -. "Mitiga" .-> P3
+        SLM -. "Alimenta" .-> KG
+        AGENTES -. "Razona sobre" .-> KG
+    end
+
+    %%------------------------------------%%
+    %% CAPA 4: COMPONENTES METODOLÓGICOS   %%
+    %%------------------------------------%%
+    subgraph CapaMetodologia ["4. ENVOLVENTE METODOLÓGICO (Variables Dependientes y Fases)"]
+        direccion(TB)
+        V[Control: Complejidad acotada <br> Dependiente: Coherencia Semántica]:::output
+        
+        O1[O.E.1: Analizar \nestructuras]:::objetivo
+        O2[O.E.2: Diseñar \nmodelo semántico]:::objetivo
+        O3[O.E.3: Implementar \narquitectura]:::objetivo
+        O4[O.E.4: Validar \ndesempeño]:::objetivo
+
+        F1[Fase 1: Taxonomía y \nOntología Preliminar]:::metodo
+        F2[Fase 2: Grafo OWL/RDF \n(Neo4j)]:::metodo
+        F3[Fase 3: Flujos de \nAgentes (UML/BPMN)]:::metodo
+        F4[Fase 4: Desarrollo \nPrototipo]:::metodo
+        F5[Fase 5: Eval MLOps \ny Likert experto]:::metodo
+
+        %% Relación Objetivos -> Fases
+        V -. "Condiciona" .-> F4
+        O1 --> F1
+        O2 --> F2
+        O3 --> F3
+        O3 --> F4
+        O4 --> F5
+    end
+
+    %%------------------------------------%%
+    %% CONEXIONES CASCADA CROSS-CAPAS      %%
+    %%------------------------------------%%
+    OG --> CapaMetodologia
+    
+    %% La tecnología instrumentaliza la metodología
+    KG -. "Fundamenta" .-> F2
+    SLM -. "Soporta extracción en" .-> F4
+    AGENTES -. "Ejecuta en" .-> F5
+    
+    %% Fases afectan problema
+    F5 -. "Mide mitigación frente a" .-> P1
+```
+
+---
+
+## 2. Auditoría de Coherencia V2 (Análisis Fino)
+
+Gracias a la lectura pormenorizada de tu documento (incluyendo tu marco teórico, diseño experimental cuasi-experimental y consideraciones de AgentOps), la perspectiva de los "vacíos" se refina significativamente.
+
+### ✅ 2.1 Insights Positivos (Súper Poderes de tu Documento)
+1. **El "Grounding" Teórico (Text-to-Graph):** En la lectura profunda encontré que tu documento **sí menciona explícitamente** que los SLM están "optimizados para la traducción de texto natural a formatos estructurados (Text-to-Graph)" (Capítulo de Problema). *Esto justifica matemáticamente la inclusión del SLM: están allí para poblar el KG salvando costos.*
+2. **Defensa contra "LLM-as-a-Judge":** Tu sección de evaluación agéntica admite que utilizar un solo juez LLM introduce sesgos estilísticos. Al usar **KG + Agentes**, tu propuesta no solo verifica coherencia base, sino que usa el Grafo para medir hechos lógicos, mitigando el sesgo del LLM. Es un argumento defensivo brutal para la sustentación.
+3. **El alcance acotado (Variables de Control):** Tienes muy claro que no es un producto en "producción" total (MLOps ligero) y acotas por tipo de documento y complejidad. Eso hace factible tu Fase 5 ("Diseño Cuasi-Experimental").
+
+### ⚠️ 2.2 Alertas Metodológicas Finas (Accionables a corregir en `Plantilla.tex`)
+
+Al leer capa por capa, identifiqué discordancias finas entre tus conceptos teóricos brillantes y cómo redactaste los "Objetivos o Fases".
+
+> [!WARNING] Alerta de Precisión 1: Ausencia del "SLM" en el Objetivo Específico 2
+> **Hallazgo:** Explicas maravillosamente en el planteamiento que el "SLM es el extractor natural hacia el grafo". Sin embargo, tu **O.E.2 dice:** *"Diseñar un modelo semántico-ontológico implementado como KG..."*.
+> **Corrección Sugerida:** El O.E.2 o la Fase 2 deberían mencionar que el diseño conceptual debe contemplar los parámetros / prompts / formato que usarán los SLM para inyectar datos (Relation Extraction). 
+
+> [!TIP] Alerta de Precisión 2: La Ontología de Fase 1
+> **Hallazgo (Mitigado):** En mi anterior revisión, creí que la Fase 1 era abstracta. Tras la lectura profunda, vi que en la Fase 1 prometes una "taxonomía base y ontología preliminar" (Línea 606). ¡Esto es excelente!
+> **Corrección Sugerida:** Asegúrate de que, en el texto donde detallas la Fase 1, se diga que esta "ontología preliminar" consistirá en **Heurísticas Automatizables** (propiedades que un Cypher query pueda consultar luego en la Fase 5 para el Multihop reasoning).
+
+> [!IMPORTANT] Alerta Crítica 3: "La Memoria" vs "La Edición en Vivo"
+> **Hallazgo:** Tu marco teórico habla de la **Actualización eficiente de estados** (Línea 506) en los sistemas agénticos. Sin embargo, no hay ni un solo punto en la Fase 3 o Fase 4 que hable de: *"¿Qué pasa si el investigador borra un párrafo del documento porque cambió de opinión?"*.
+> **Corrección Sugerida:** Si el KG es un "Ground Truth dinámico", debes agregar explícitamente en la Fase 4 un hito o flujo de **"Mecanismo de Invalidación o Actualización de Nodos"**. Si el usuario edita, el Agente debe borrar o recargar ese Zettel en el KG. Si no lo escribes ahora, un jurado preguntará cómo manejas el "des-aprendizaje" en el Grafo durante la escritura.
+
+### 💡 Conclusión de la Iteración
+Esta V2 demuestra que tu anteproyecto tiene un cimiento bibliográfico y tecnológico casi inquebrantable (Docpilot, MMA-RAG, Multihop con KG). El marco teórico soporta perfectamente el experimento. **Los ajustes que necesitas hacer en `Plantilla.tex` son puramente de "Alineación de Promesa"**: Asegúrate de que los detalles brillantes que tienes en la "Introducción" y "Marco Teórico" aterricen explícitamente en el texto descriptivo de las "Fases (1 a la 5)" para que tu jurado vea el mapa completo sin ambigüedades.

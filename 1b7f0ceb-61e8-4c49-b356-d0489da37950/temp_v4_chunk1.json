@@ -1,0 +1,133 @@
+{
+    "source": "Plantilla.tex",
+    "chunk": "1-250",
+    "section": "Metadatos y Resumen",
+    "nodes": [
+        {
+            "id": "RES_TITULO",
+            "type": "Idea",
+            "label": "Desarrollo de Sist. Agéntico (KG + SLM) para verificación automatizada",
+            "section": "Metadatos"
+        },
+        {
+            "id": "RES_KW1",
+            "type": "Concepto",
+            "label": "Sistemas Agénticos",
+            "section": "Metadatos"
+        },
+        {
+            "id": "RES_KW2",
+            "type": "Concepto",
+            "label": "Modelos Pequeños de Lenguaje (SLM)",
+            "section": "Metadatos"
+        },
+        {
+            "id": "RES_KW3",
+            "type": "Concepto",
+            "label": "Ingeniería de Contexto",
+            "section": "Metadatos"
+        },
+        {
+            "id": "RES_KW4",
+            "type": "Concepto",
+            "label": "Grafos de Conocimiento (KG)",
+            "section": "Metadatos"
+        },
+        {
+            "id": "RES_PROB1",
+            "type": "Problema",
+            "label": "Difícil alinear problema, obj, métodología y teoría",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_PROB2",
+            "type": "Problema",
+            "label": "LLM limitados por 'amnesia contextual'",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_PROB3",
+            "type": "Problema",
+            "label": "LLM pierden relaciones causales en textos extensos",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_PROB4",
+            "type": "Problema",
+            "label": "Vacíos en aseguramiento calidad estructural doc científicos",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_OBJ_GEN",
+            "type": "Objetivo",
+            "label": "Prototipo copiloto (KG+SLM) de Ing Contexto",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_MET1",
+            "type": "Metodologia",
+            "label": "Enfoque aplicado-experimental cuantitativo",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS1",
+            "type": "Fase",
+            "label": "Análisis conceptual estructuras metodológicas",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS2",
+            "type": "Fase",
+            "label": "Modelado semántico (Ontología y KG)",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS3",
+            "type": "Fase",
+            "label": "Diseño arquitectura agéntica (módulos cognitivos)",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS3_MOD1",
+            "type": "Módulo",
+            "label": "Lectura y Verificación",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS3_MOD2",
+            "type": "Módulo",
+            "label": "Razonamiento y Navegación",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS3_MOD3",
+            "type": "Módulo",
+            "label": "Gestión de Memoria Contextual",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS4",
+            "type": "Fase",
+            "label": "Implementación prototipo (Integrar KG, SLM, Agentes)",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_FAS5",
+            "type": "Fase",
+            "label": "Evaluación: métricas auto + panel expertos",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_OUT",
+            "type": "Entregable",
+            "label": "Copiloto para detectar desalineaciones y dar feedback",
+            "section": "Resumen"
+        },
+        {
+            "id": "RES_APORTE",
+            "type": "Contexto",
+            "label": "Integración Agentes+KG+Ing Contexto para calidad científica",
+            "section": "Resumen"
+        }
+    ]
+}

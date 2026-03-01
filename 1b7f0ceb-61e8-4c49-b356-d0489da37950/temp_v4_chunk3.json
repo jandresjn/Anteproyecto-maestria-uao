@@ -1,0 +1,174 @@
+{
+    "source": "Plantilla.tex",
+    "chunk": "501-750",
+    "nodes": [
+        {
+            "id": "EVAL_1",
+            "type": "Evaluacion",
+            "label": "Evaluación de Persistencia Contextual y Memoria Continua",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "EVAL_2",
+            "type": "Evaluacion",
+            "label": "LLM-as-a-Judge: Escalabilidad masiva",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "EVAL_3",
+            "type": "Problema",
+            "label": "Sesgo estilístico restrictivo de usar un solo LLM referí",
+            "section": "Antecedentes_y_EstadoArte"
+        },
+        {
+            "id": "DIS_1",
+            "type": "Metodologia",
+            "label": "Enfoque mixto: Aplicado-experimental cuantitativo",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "DIS_2",
+            "type": "Desafio",
+            "label": "Ausencia de métricas ML estándar (Precision/F1) para evaluar coherencia discursiva y multi-hop",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "DIS_3",
+            "type": "Hipotesis",
+            "label": "H1: Copiloto + KG mejora significativamente coherencia conceptual",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "VAR_1",
+            "type": "Variable",
+            "label": "V. Independiente: Sistema Agéntico + Soporte KG",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "VAR_2",
+            "type": "Variable",
+            "label": "V. Dependiente: Coherencia semántica, consistencia estructural",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "VAR_3",
+            "type": "Variable",
+            "label": "V. de Control: Tipo Doc y límite de complejidad",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "DIS_4",
+            "type": "Metodologia",
+            "label": "Diseño Cuasi-Experimental (Pretest/Postest con Grupo Único)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "DIS_5",
+            "type": "Inst_Eval",
+            "label": "Métricas Automáticas (Esquema LLM-as-a-Judge en MLOps)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "DIS_6",
+            "type": "Inst_Eval",
+            "label": "Validación Cruzada Experta (Escala Likert 1-5)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "FAS3_1",
+            "type": "Fase_Metodologica",
+            "label": "Fase 1: Revisión taxonómica y patrones semánticos (Mes 1-2)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "FAS3_2",
+            "type": "Fase_Metodologica",
+            "label": "Fase 2: Modelado formal de ontología (OWL/RDF) (Mes 2-4)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "FAS3_3",
+            "type": "Tecnologia",
+            "label": "Validación pura de consultas Cypher (Mes 3-4)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "FAS3_4",
+            "type": "Fase_Metodologica",
+            "label": "Fase 3: Arquitectura de Módulos (Lectura, verificación, navegación) (Mes 4-6)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "FAS3_5",
+            "type": "Fase_Metodologica",
+            "label": "Fase 4: Desarrollo e integración Prototipo en entorno MLOps (Mes 5-8)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "FAS3_6",
+            "type": "Fase_Metodologica",
+            "label": "Fase 5: Eval híbrida (Multihop automátizado + Likert) (Mes 7-8)",
+            "section": "Diseno_Metodologico"
+        },
+        {
+            "id": "RES_1",
+            "type": "Entregable",
+            "label": "E1: Taxonomía de coherencia documental",
+            "section": "Resultados_Esperados"
+        },
+        {
+            "id": "RES_2",
+            "type": "Entregable",
+            "label": "E2: Base Neo4j o OWL/RDF estructurada y operable",
+            "section": "Resultados_Esperados"
+        },
+        {
+            "id": "RES_3",
+            "type": "Entregable",
+            "label": "E3: Diagramas UML y BPMN del ecosistema Multiagente",
+            "section": "Resultados_Esperados"
+        },
+        {
+            "id": "RES_4",
+            "type": "Entregable",
+            "label": "E4: Prototipo funcional operante / logs e infraestructura",
+            "section": "Resultados_Esperados"
+        },
+        {
+            "id": "RES_5",
+            "type": "Entregable",
+            "label": "E5: Data consolidada (pre/post test) y análisis de sesgo",
+            "section": "Resultados_Esperados"
+        },
+        {
+            "id": "RES_6",
+            "type": "Alcance",
+            "label": "Nivel Prototipo (No entorno productivo comercial)",
+            "section": "Resultados_Esperados"
+        },
+        {
+            "id": "COS_1",
+            "type": "Presupuesto",
+            "label": "Licenciamiento Grafo: Neo4j (1.5 Millones COP)",
+            "section": "Recursos_Aspectos_Econ"
+        },
+        {
+            "id": "COS_2",
+            "type": "Presupuesto",
+            "label": "Infraestructura Agéntica: Azure (960k COP)",
+            "section": "Recursos_Aspectos_Econ"
+        },
+        {
+            "id": "COS_3",
+            "type": "Presupuesto",
+            "label": "Recursos de Inferencia: Tokens LLM/IA (500k COP)",
+            "section": "Recursos_Aspectos_Econ"
+        },
+        {
+            "id": "COS_4",
+            "type": "Presupuesto",
+            "label": "Recurso Humano: Investigador + Director (80 Millones COP)",
+            "section": "Recursos_Aspectos_Econ"
+        }
+    ]
+}

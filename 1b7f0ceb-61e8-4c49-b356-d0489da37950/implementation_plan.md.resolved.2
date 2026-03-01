@@ -1,0 +1,29 @@
+# Plan de Implementación: Arquitectura Lógica de Alta Densidad (V3)
+
+## Objetivo
+Crear un diagrama de arquitectura lógica extremadamente denso (200-300 nodos) que mapee minuciosamente cada idea atómica, concepto teórico, tecnología, diseño metodológico, limitación y entregable del anteproyecto ([Plantilla.tex](file:///c:/Users/jandr/OneDrive/Documentos/dev/Anteproyecto-maestria-uao/Plantilla.tex)).
+
+## Estrategia de Gestión de Contexto (Iteración Agéntica)
+Dado que los documentos extensos diluyen la atención del modelo (problema de "aguja en el pajar") y las ventanas de contexto tienen límites, el agente utilizará un enfoque de **Map-Reduce Semántico**:
+1. **Lectura por Trozos (Map):** Leer el documento en bloques pequeños (ej. 150-200 líneas).
+2. **Extracción y Volcado Rápido:** Extraer los Zettels (Ideas, Problemas, Metodologías, Tecnologías) y guardarlos en un archivo de memoria temporal (`temp_nodes.json` o `temp_nodes.md`).
+3. **Liberación de Contexto:** Al escribir en el archivo temporal, el agente "olvida" los detalles textuales brutos del trozo anterior y lee el siguiente, manteniendo su atención al 100%.
+4. **Síntesis Global (Reduce):** Al terminar todo el documento, el agente lee únicamente el archivo temporal consolidado (que contiene cientos de ideas destiladas pura) y teje las relaciones (aristas) para construir el super-grafo Mermaid.
+
+## Fases de Ejecución
+
+### Fase 1: Extracción Exhaustiva (Map)
+- **Herramienta:** `view_file` (fragmentado) y `write_to_file` / `multi_replace`.
+- Se iterará sobre [Plantilla.tex](file:///c:/Users/jandr/OneDrive/Documentos/dev/Anteproyecto-maestria-uao/Plantilla.tex) en unos 5 o 6 bloques.
+- Por cada bloque, se registrarán nodos bajo las categorías formales del Marco Lógico (Teleológico, Problema, Tecnológico, Metodológico, Referencias/Estado del Arte).
+
+### Fase 2: Consolidación y Creación de Aristas (Reduce)
+- Se leerá el archivo de memoria temporal acumulado.
+- Se establecerán lógicamente las conexiones causales (`-->`), de soporte (`-.->`) y de mitigación entre los cientos de nodos.
+
+### Fase 3: Renderizado y Alertas Técnicas
+- **Generación:** Se construirá el artefacto final `arquitectura_logica_masiva.md`.
+- **Alerta de Renderizado:** Un diagrama de 300 nodos de Mermaid es computacionalmente pesado para los navegadores/editores. Se agruparán estratégicamente en `subgraphs` para evitar el colapso del motor de renderizado.
+
+## User Review Required
+No immediate blockade. Will proceed to extract.
